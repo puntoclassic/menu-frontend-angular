@@ -12,6 +12,7 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 steps:
-- script: |    
+- script: |  
+    npm install  
     ng build --prod
   displayName: 'build project'
