@@ -12,10 +12,7 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 steps:
-- script: |    
-    npm install
-    ng build
-  displayName: 'npm install and build'
+
 - task: CopyFiles@2
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)/dist'
