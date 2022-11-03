@@ -13,5 +13,6 @@ pool:
 
 steps:
 - script: |    
+    npm install
     ng build
   displayName: 'npm install and build'
