@@ -18,7 +18,7 @@ steps:
   displayName: 'npm install and build'
 - task: CopyFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
-    contents: '*.tgz' 
+    sourceFolder: '$(Build.SourcesDirectory)/dist'
+    contents: '*' 
     targetFolder: $(Build.ArtifactStagingDirectory)/frontend-angular
   displayName: 'Copy angular dist'
