@@ -12,14 +12,8 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 steps:
-- script: |    
-    npm install
-    ng build
-  displayName: 'npm install and build'
-- task: ArchiveFiles@2
+- task: PublishPipelineArtifact@1
   inputs:
-    rootFolderOrFile: 'dist'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: '$(Build.BuildId).zip'''
+    publishLocation: 'pipeline'
