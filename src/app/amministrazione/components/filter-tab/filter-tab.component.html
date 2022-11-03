@@ -1,0 +1,14 @@
+<ul class="p-0" style="list-style-type: none">
+    <li><b>Ordinamento</b></li>
+    <li *ngFor="let column of columns">
+        <button class="btn btn-link p-0 text-decoration-none" [ngClass]="{'fw-bold':orderBy===column.name}"
+            (click)="onOrderByChange(column.name)">{{column.label}}</button>
+    </li>
+</ul>
+<ul class="p-0" style="list-style-type: none">
+    <li><b>Tipo</b></li>
+    <li><button class="btn btn-link p-0  text-decoration-none" [ngClass]="{'fw-bold':ascending}"
+            (click)="onAscendingChange(true)">Crescente</button></li>
+    <li><button class="btn btn-link p-0 text-decoration-none" [ngClass]="{'fw-bold':!ascending}"
+            (click)="onAscendingChange(false)">Decrescente</button></li>
+</ul>

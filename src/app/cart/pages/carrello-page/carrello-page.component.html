@@ -1,0 +1,35 @@
+<div class="container bg-white d-flex flex-grow-1 flex-column shadow g-0">
+    <div class="col-lg-12">
+        <app-row>
+            <app-topbar>
+                <app-topbar-left class="col-lg-8">
+                    <app-search-form></app-search-form>
+                </app-topbar-left>
+                <app-topbar-right class="col-lg-4">
+                    <app-cart-button></app-cart-button>
+                    <app-account-manage></app-account-manage>
+                </app-topbar-right>
+            </app-topbar>
+        </app-row>
+        <app-row>
+            <app-header></app-header>
+        </app-row>
+        <app-row class="bg-secondary p-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a class="text-light" [routerLink]="['/']">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">Carrello</li>
+                </ol>
+            </nav>
+        </app-row>
+        <app-row class="p-4">
+            <app-carrello-content *ngIf="cartHasItems; else noItems"></app-carrello-content>
+
+            <ng-template #noItems>
+                <p>Non ci sono elementi nel carrello</p>
+            </ng-template>
+        </app-row>
+    </div>
+</div>

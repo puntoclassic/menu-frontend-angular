@@ -1,0 +1,111 @@
+import { Component, Inject, OnInit } from "@angular/core";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { catchError, map, throwError } from "rxjs";
+import { CategoryService } from "src/app/amministrazione/services/category.service";
+import { AppService } from "src/app/shared/services/app.service";
+
+@Component({
+  selector: "app-category-edit-page",
+  templateUrl: "./category-edit-page.component.html",
+  styleUrls: ["./category-edit-page.component.scss"],
+})
+export class CategoryEditPageComponent implements OnInit {
+  isPending: boolean = false;
+  form: FormGroup;
+  nomeControl: AbstractControl;
+  immagineControl: AbstractControl;
+  id: number;
+  currentImageUrl?: string;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private categoryService: CategoryService,
+    private appService: AppService,
+    private router: Router,
+    private currentRoute: ActivatedRoute,
+    @Inject("BACKEND_URL") private backendUrl: string,
+  ) {
+    this.currentRoute.params.subscribe((params: Params) => {
+      this.id = params.id;
+    });
+
+    this.nomeControl = this.formBuilder.control("", {
+      validators: [
+        Validators.required,
+      ],
+    });
+
+    this.immagineControl = this.formBuilder.control("", {});
+
+    this.form = this.formBuilder.group({
+      name: this.nomeControl,
+      image: this.immagineControl,
+    });
+  }
+
+  fetchData() {
+    this.categoryService.getCategory(this.id).pipe(
+      map((response: { name: string; image_url?: string }) => {
+        this.nomeControl.setValue(response.name);
+        this.currentImageUrl = response.image_url
+          ? this.backendUrl + "/" + response.image_url
+          : null;
+      }),
+      catchError(() => {
+        this.router.navigate(["./"]);
+        return throwError(() => new Error("badRequest"));
+      }),
+    ).subscribe();
+  }
+
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
+  filePicked(event: any) {
+    var file = event.target.files[0];
+    this.immagineControl.clearValidators();
+
+    if (file) {
+      this.immagineControl.setErrors({
+        fileTooBig: file.size > 1000 * 1000,
+        badFileFormat: !["image/jpg", "image/jpeg", "image/png"].includes(
+          file.type,
+        ),
+      });
+
+      this.immagineControl.setValue(file);
+    }
+  }
+
+  setIsPending(value) {
+    this.isPending = value;
+  }
+
+  onSubmit(data: any) {
+    if (this.form.valid) {
+      this.isPending = true;
+      this.categoryService.updateCategory(this.id, data).pipe(
+        map(() => {
+          this.isPending = false;
+          this.appService.pushMessage(
+            "success",
+            "Categoria aggiornata",
+          );
+          this.fetchData();
+        }),
+        catchError(() => {
+          this.isPending = false;
+          this.appService.pushMessage("error", "Si è verificato un errore");
+          return throwError(() => new Error("badRequest"));
+        }),
+      ).subscribe();
+    }
+  }
+}

@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Smooch&family=Smooch+Sans:wght@100&display=swap');
+
+@import "./icons/bootstrap-icons.scss";
+
+@import "./myvariables";
+
+@import "./bootstrap/bootstrap.scss";
+
+
+
+html,
+body {
+    height: 100%;
+}
+
+.App {
+    height: 100%;
+}
+
+.app-title {
+    font-family: 'Smooch', cursive;
+}
+
+.ingredients {
+    font-family: 'Smooch Sans', sans-serif;
+}
+
+
+
+
+
+
+
+.nav-item {
+    transition: background-color 500ms;
+
+    .nav-link {
+        color: black;
+    }
+
+    .nav-pill-item {
+
+        &.active {
+            background-color: rgb(var(--bs-primary-rgb))
+        }
+
+
+
+        &:hover {
+            background-color: #a99f9f;
+        }
+    }
+
+
+}
+
+.category-page {
+    opacity: 1;
+    transition: opacity 2s;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    grid-template-rows: repeat(auto-fit, minmax(200px, 200px));
+    justify-content: center;
+}
+
+.topbar-style {
+    background-color: rgb(var(--bs-primary-rgb))
+}
+
+.category-title {
+    background-color: rgb(var(--bs-primary-rgb))
+}

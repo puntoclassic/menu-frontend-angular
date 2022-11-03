@@ -1,0 +1,102 @@
+<div class="container bg-white d-flex flex-grow-1 flex-column shadow g-0">
+    <div class="col-lg-12 d-flex flex-grow-1 flex-column">
+        <app-row>
+            <app-topbar>
+                <app-topbar-left class="col-lg-8">
+                    <app-home-button></app-home-button>
+                </app-topbar-left>
+                <app-topbar-right class="col-lg-4">
+                    <app-cart-button></app-cart-button>
+                    <app-account-manage></app-account-manage>
+                </app-topbar-right>
+            </app-topbar>
+        </app-row>
+        <app-row>
+            <app-header></app-header>
+        </app-row>
+        <app-row class="bg-secondary p-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a class="text-light" [routerLink]="['/']">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">Crea account</li>
+                </ol>
+            </nav>
+        </app-row>
+        <app-messages></app-messages>
+        <app-row class="p-4 d-flex flex-grow-1 justify-content-center align-items-center">
+            <form class="col-lg-4" [formGroup]="signinForm" (ngSubmit)="onSigninSubmit(signinForm.value)">
+                <div class="form-group pt-2">
+                    <label class="form-label">Email</label>
+                    <input type="text" autocomplete="username" [formControl]="emailControl" class="form-control"
+                        [ngClass]="{'is-invalid':!emailControl.valid  && emailControl.touched}" />
+                    <div class="invalid-feedback">
+                        <span *ngIf="emailControl.hasError('required')">Il campo email è
+                            obbligatorio</span>
+                        <span *ngIf="emailControl.hasError('emailIsBusy')">Email in uso</span>
+                    </div>
+                </div>
+                <div class="form-group pt-2">
+                    <label class="form-label">Nome</label>
+                    <input type="text" autocomplete="name" [formControl]="firstnameControl" class="form-control"
+                        [ngClass]="{'is-invalid':!firstnameControl.valid  && firstnameControl.touched}" />
+                    <div class="invalid-feedback">
+                        <span *ngIf="firstnameControl.hasError('required')">Il campo nome è
+                            obbligatorio</span>
+                        <span *ngIf="firstnameControl.hasError('pattern')">Il campo nome può contenere
+                            solo lettere</span>
+                    </div>
+                </div>
+                <div class="form-group pt-2">
+                    <label class="form-label">Cognome</label>
+                    <input type="text" autocomplete="family-name" [formControl]="lastnameControl" class="form-control"
+                        [ngClass]="{'is-invalid':!lastnameControl.valid  && lastnameControl.touched}" />
+                    <div class="invalid-feedback">
+                        <span *ngIf="lastnameControl.hasError('required')">Il campo cognome è
+                            obbligatorio</span>
+                        <span *ngIf="lastnameControl.hasError('pattern')">Il campo cognome può contenere
+                            solo lettere</span>
+                    </div>
+                </div>
+                <div class="form-group pt-2">
+                    <label class="form-label">Password</label>
+                    <input type="password" [ngClass]="{'is-invalid':!passwordControl.valid && passwordControl.touched}"
+                        [formControl]="passwordControl" class="form-control" />
+                    <div class="invalid-feedback">
+                        <span *ngIf="passwordControl.hasError('required')">Il campo password è
+                            obbligatorio</span>
+                        <span *ngIf="passwordControl.hasError('pattern')">
+                            La password deve essere lunga almeno 8 caratteri e contenere almeno: 1 lettera maiuscola, 1
+                            numero e 1
+                            carattere speciale
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group pt-2">
+                    <label class="form-label">Conferma password</label>
+                    <input type="password"
+                        [ngClass]="{'is-invalid':!confirmPasswordControl.valid && confirmPasswordControl.touched}"
+                        [formControl]="confirmPasswordControl" class="form-control" />
+                    <div class="invalid-feedback">
+                        <span *ngIf="confirmPasswordControl.hasError('required')">Il campo conferma
+                            password è
+                            obbligatorio</span>
+                        <span *ngIf="confirmPasswordControl.hasError('passwordMatch')">Le due password devono
+                            corrispondere</span>
+                    </div>
+                </div>
+                <div class="form-group pt-4">
+                    <button [disabled]="isPending || !this.signinForm.valid" type="submit" class="btn btn-primary me-2"
+                        (mousedown)="$event.preventDefault()">
+                        <span *ngIf="isPending" class="spinner-border spinner-border-sm me-2" role="status"
+                            aria-hidden="true"></span>
+                        Crea account
+                    </button>
+                </div>
+            </form>
+        </app-row>
+
+    </div>
+</div>

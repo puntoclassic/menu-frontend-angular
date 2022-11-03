@@ -1,0 +1,12 @@
+<td class="col-lg-1">{{category.id}}</td>
+<td class="col-lg-8">{{category.name}}</td>
+<td class="col-lg-3 text-center">
+    <div class="btn-group">
+        <button class="text-decoration-none btn btn-sm btn-secondary" [routerLink]="['modifica',category.id]"><i
+                class="bi bi-pencil-square me-2"></i>
+            Modifica</button>
+        <button class="text-decoration-none btn btn-sm btn-danger" [routerLink]="['elimina',category.id]"><i
+                class="bi bi-trash  me-2"></i>
+            Elimina</button>
+    </div>
+</td>

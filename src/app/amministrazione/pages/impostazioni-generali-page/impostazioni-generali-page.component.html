@@ -1,0 +1,142 @@
+<div class="container bg-white d-flex flex-grow-1 flex-column shadow g-0">
+    <div class="col-lg-12 d-flex flex-grow-1 flex-column">
+        <app-row>
+            <app-topbar>
+                <app-topbar-left class="col-lg-8">
+                    <app-home-button></app-home-button>
+                </app-topbar-left>
+                <app-topbar-right class="col-lg-4">
+                    <app-cart-button></app-cart-button>
+                    <app-account-manage></app-account-manage>
+                </app-topbar-right>
+            </app-topbar>
+        </app-row>
+        <app-row>
+            <app-header></app-header>
+        </app-row>
+        <app-row class="bg-secondary p-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a class="text-light" [routerLink]="['/account']">Profilo</a>
+                    </li>
+
+                    <li class="breadcrumb-item active text-light" aria-current="page">Impostazioni generali</li>
+                </ol>
+            </nav>
+        </app-row>
+        <app-messages></app-messages>
+        <app-row class="p-4">
+            <form class="col-lg-4" [formGroup]="form" (submit)="onSubmit(form.value)">
+                <h5>Impostazioni generali</h5>
+                <div class="form-group pt-4">
+                    <h6>INFORMAZIONI SITO</h6>
+                </div>
+                <div class="form-group pt-2">
+                    <label class="form-label">Nome del sito</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{'is-invalid':!siteNameControl.valid && siteNameControl.touched}"
+                        [formControl]="siteNameControl" />
+                    <div class="invalid-feedback">
+                        <p *ngIf="siteNameControl.hasError('required')" class="m-0">Il campo nome del sito è
+                            obbligatorio</p>
+                    </div>
+                </div>
+                <div class="form-group pt-2">
+                    <label class="form-label">Motto del sito</label>
+                    <input type="text" class="form-control"
+                        [ngClass]="{'is-invalid':!siteSubtitleControl.valid && siteSubtitleControl.touched}"
+                        [formControl]="siteSubtitleControl" />
+                </div>
+
+                <div class="form-group pt-4">
+                    <h6>ORDINI</h6>
+                </div>
+
+                <div class="form-group pt-2">
+                    <label class="form-label">Costi di spedizione</label>
+                    <div class="input-group">
+                        <span class="input-group-text">€</span>
+                        <input type="text" class="form-control"
+                            [ngClass]="{'is-invalid':!shippingCostsControl.valid && shippingCostsControl.touched}"
+                            [formControl]="shippingCostsControl" />
+                    </div>
+                    <div class="invalid-feedback">
+                        <p *ngIf="shippingCostsControl.hasError('required')" class="m-0">Il campo costi di spedizione è
+                            obbligatorio
+                        </p>
+                        <p *ngIf="shippingCostsControl.hasError('pattern')" class="m-0">Il campo costi di spedizione
+                            deve contenere
+                            un prezzo
+                            valido</p>
+                    </div>
+                </div>
+
+                <div class="form-group pt-2">
+                    <label class="form-label">Stato quando l'ordine viene creato</label>
+                    <select class="form-control"
+                        [ngClass]="{'is-invalid':!orderCreatedStateControl.valid && orderCreatedStateControl.touched}"
+                        [formControl]="orderCreatedStateControl">
+                        <option value=""> -- Nessuno stato selezionato -- </option>
+                        <option *ngFor="let state of orderStates" [value]="state.id">{{state.name}}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        <p *ngIf="shippingCostsControl.hasError('required')" class="m-0">Il campo è obbligatorio
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group pt-2">
+                    <label class="form-label">Stato quando l'ordine viene pagato</label>
+                    <select class="form-control"
+                        [ngClass]="{'is-invalid':!orderPaidStateControl.valid && orderPaidStateControl.touched}"
+                        [formControl]="orderPaidStateControl">
+                        <option value=""> -- Nessuno stato selezionato -- </option>
+                        <option *ngFor="let state of orderStates" [value]="state.id">{{state.name}}</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        <p *ngIf="shippingCostsControl.hasError('required')" class="m-0">Il campo è obbligatorio
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group pt-4">
+                    <h6>TEMA</h6>
+                </div>
+
+                <div class="form-group pt-2">
+                    <label class="form-label">Colore primario</label>
+                    <input type="color" class="form-control  form-control-color"
+                        [ngClass]="{'is-invalid':!primaryColorControl.valid && primaryColorControl.touched}"
+                        [formControl]="primaryColorControl" />
+                    <div class="invalid-feedback">
+                        <p *ngIf="shippingCostsControl.hasError('required')" class="m-0">Il campo è obbligatorio
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group pt-2">
+                    <label class="form-label">Colore secondario</label>
+                    <input type="color" class="form-control  form-control-color"
+                        [ngClass]="{'is-invalid':!secondaryColorControl.valid && secondaryColorControl.touched}"
+                        [formControl]="secondaryColorControl" />
+                    <div class="invalid-feedback">
+                        <p *ngIf="shippingCostsControl.hasError('required')" class="m-0">Il campo è obbligatorio
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group pt-4">
+                    <button type="submit" class="btn btn-success me-2" [disabled]="isPending || !form.valid">
+                        <span *ngIf="isPending" class="spinner-border spinner-border-sm me-2" role="status"
+                            aria-hidden="true"></span>
+                        Salva
+                    </button>
+                </div>
+            </form>
+        </app-row>
+    </div>
+
+
+
+</div>

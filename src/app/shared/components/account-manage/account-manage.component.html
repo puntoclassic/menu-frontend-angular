@@ -1,0 +1,8 @@
+<div *ngIf="isLogged">
+        <a class="btn btn-link text-light text-decoration-none" [routerLink]="['/account']"><i
+                        class="bi bi-globe2 pe-2"></i>Profilo</a>
+        <a class="btn btn-link text-light text-decoration-none" (click)="onLogoutClick()"><i
+                        class="bi-box-arrow-right pe-2"></i>Esci</a>
+</div>
+<a *ngIf="!isLogged" [routerLink]="['/account/login']" class="btn btn-link text-light text-decoration-none"><i
+                class="bi bi-person pe-2"></i>{{'LOGIN' | translate}}</a>

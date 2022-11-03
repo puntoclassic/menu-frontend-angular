@@ -1,0 +1,16 @@
+<td class="col-lg-6">{{row.item.name}}</td>
+<td class="text-center">{{row.quantity}}</td>
+<td class="text-center">{{row.item.price | priceOutput}}</td>
+<td *ngIf="actionsVisible" class="text-center">
+    <div class="d-flex flex-row justify-content-center">
+        <button type="submit" class="btn btn-link m-0" (click)="onIncreaseQtaClick()">
+            <i class="bi bi-bag-plus"></i>
+        </button>
+        <button type="submit" class="btn btn-link m-0" (click)="onDecreaseQtaClick()">
+            <i class="bi bi-bag-dash"></i>
+        </button>
+        <button type="submit" class="btn btn-link m-0" (click)="onDeleteFromCartClick()">
+            <i class="bi bi-bag-x"></i>
+        </button>
+    </div>
+</td>

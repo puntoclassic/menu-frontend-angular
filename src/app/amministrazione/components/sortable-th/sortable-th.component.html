@@ -1,0 +1,5 @@
+<button [ngClass]="orderBy===column?'fw-bold':'fw-light'" class="btn btn-link p-0 text-decoration-none"
+    (click)="onClickEvent()"><i class="me-2 bi" *ngIf="orderBy===column"
+        [ngClass]="ascending?'bi-sort-up':'bi-sort-down'"></i>
+    <ng-content></ng-content>
+</button>

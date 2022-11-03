@@ -1,0 +1,38 @@
+<div class="container bg-white d-flex flex-grow-1 flex-column shadow g-0">
+    <div class="col-lg-12 d-flex flex-grow-1 flex-column">
+        <app-row>
+            <app-topbar>
+                <app-topbar-left class="col-lg-8">
+                    <app-search-form></app-search-form>
+                </app-topbar-left>
+                <app-topbar-right class="col-lg-4">
+                    <app-cart-button></app-cart-button>
+                    <app-account-manage></app-account-manage>
+                </app-topbar-right>
+            </app-topbar>
+        </app-row>
+        <app-row>
+            <app-header></app-header>
+        </app-row>
+        <app-row>
+            <app-category-pills></app-category-pills>
+        </app-row>
+        <app-row class="d-flex flex-grow-1">
+            <div *ngIf="category==null || foods==null"
+                class="col-lg-12 p-4 d-flex flex-grow-1 justify-content-center align-items-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div *ngIf="category && foods" class="col-lg-12 p-4 d-flex flex-grow-1 flex-column">
+                <div class="row g-0">
+                    <h4 class="fw-light">Categoria {{category.name.toLowerCase()}}</h4>
+                </div>
+                <div class="row g-0">
+                    <p *ngIf="foods.length == 0">Non ci sono cibi per questa categoria</p>
+                    <app-food-item *ngFor="let item of foods" [item]="item" [showCategoryPill]="false"></app-food-item>
+                </div>
+            </div>
+        </app-row>
+    </div>
+</div>

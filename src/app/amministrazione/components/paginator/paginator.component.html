@@ -1,0 +1,12 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item" (click)="pageChange(currentPage-1)" [ngClass]="{'disabled':currentPage == 1}"><a
+                class="page-link">Precedente</a>
+        </li>
+        <li *ngFor="let num of numberOfPages" class="page-item" [ngClass]="{'active':num == currentPage}"
+            (click)="pageChange(num)"><a class="page-link">{{num}}</a></li>
+        <li class="page-item" [ngClass]="{'disabled':currentPage == numberOfPages.length}"><a
+                (click)="pageChange(currentPage+1)" class="page-link">Prossima</a>
+        </li>
+    </ul>
+</nav>

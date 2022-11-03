@@ -1,0 +1,61 @@
+<div class="container bg-white d-flex flex-grow-1 flex-column shadow g-0">
+    <div class="col-lg-12">
+        <app-row>
+            <app-topbar>
+                <app-topbar-left class="col-lg-8">
+                    <app-search-form></app-search-form>
+                </app-topbar-left>
+                <app-topbar-right class="col-lg-4">
+                    <app-cart-button></app-cart-button>
+                    <app-account-manage></app-account-manage>
+                </app-topbar-right>
+            </app-topbar>
+        </app-row>
+        <app-row>
+            <app-header></app-header>
+        </app-row>
+        <app-row class="bg-secondary p-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a class="text-light" [routerLink]="['/carrello']">Carrello</a>
+                    </li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">Checkout</li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">1. Tipologia consegna</li>
+                </ol>
+            </nav>
+        </app-row>
+        <app-row class="p-4">
+            <div class="col-lg-12">
+                <div class="row g-0 border-top border-bottom p-4 d-flex justify-content-center flex-column">
+                    <form class="col-lg-4 m-0" (submit)="onSubmit(form.value)">
+                        <h5 class="m-0">1. Spedizione e consegna</h5>
+                        <p>Scegli il modo in cui vuoi ricevere il tuo ordine</p>
+                        <div class="form-row mb-3">
+                            <select class="form-control"
+                                [ngClass]="{'is-invalid':!tipologiaConsegnaControl.valid  && tipologiaConsegnaControl.touched}"
+                                [formControl]="tipologiaConsegnaControl">
+                                <option value="">-- Nessuna selezione --</option>
+                                <option value="asporto">Asporto</option>
+                                <option value="domicilio">A domicilio</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                <span *ngIf="tipologiaConsegnaControl.hasError('required')">Il campo email è
+                                    obbligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-success" [disabled]="!form.valid">Vai</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="row g-0 border-bottom p-4 d-flex justify-content-center flex-column mt-2">
+                    <h5 class="m-0">2. Indirizzo e orario</h5>
+                </div>
+                <div class="row g-0 border-bottom p-4 d-flex justify-content-center flex-column mt-2">
+                    <h5 class="m-0">3. Riepilogo</h5>
+                </div>
+            </div>
+        </app-row>
+    </div>
+</div>

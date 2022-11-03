@@ -1,0 +1,101 @@
+<div class="container bg-white d-flex flex-grow-1 flex-column shadow g-0">
+    <div class="col-lg-12 d-flex flex-grow-1 flex-column">
+        <app-row>
+            <app-topbar>
+                <app-topbar-left class="col-lg-8">
+                    <app-home-button></app-home-button>
+                </app-topbar-left>
+                <app-topbar-right class="col-lg-4">
+                    <app-cart-button></app-cart-button>
+                    <app-account-manage></app-account-manage>
+                </app-topbar-right>
+            </app-topbar>
+        </app-row>
+        <app-row>
+            <app-header></app-header>
+        </app-row>
+        <app-row class="bg-secondary p-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a class="text-light" [routerLink]="['/account']">Profilo</a>
+                    </li>
+                    <li class="breadcrumb-item active text-light" aria-current="page">Impostazioni: Stati ordine</li>
+                </ol>
+            </nav>
+        </app-row>
+        <app-messages></app-messages>
+        <app-row class="ps-4 pe-4 pt-4">
+            <div class="col-lg-12">
+                <h4>Stati ordine</h4>
+            </div>
+        </app-row>
+        <app-row
+            class="bg-light ms-4 me-4 mb-4 p-2 rounded-2 shadow-sm d-flex flex-row justify-content-end align-items-center">
+            <div class="col-lg-9 mt-md-0">
+                <a [routerLink]="['crea']" class="btn btn-secondary text-decoration-none">Crea nuovo stato</a>
+            </div>
+            <div class="col-lg-3 mt-3 mt-md-0">
+                <app-admin-search-form [currentValue]="searchKey" placeHolder="Cerca uno stato"
+                    (formSearchEvent)="onFormSearchEvent($event)">
+                </app-admin-search-form>
+            </div>
+        </app-row>
+        <app-row class="ps-4 pe-4">
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-link text-decoration-none" (mousedown)=" $event.preventDefault()"
+                    (click)="orderVisible = !orderVisible"><i class="bi bi-filter me-2"></i>
+                    Ordina</button>
+            </div>
+        </app-row>
+        <app-row class="ps-4 pe-4 d-flex flex-grow-1 flex-column" style="min-height: 300px;">
+            <div *ngIf="items!=null; else loading" class="row g-0 d-flex flex-column flex-row-reverse flex-lg-row">
+                <div [ngClass]="orderVisible ? 'col-lg-10':'col-lg-12'">
+                    <table class="table table-striped align-middle m-0" *ngIf="items.length>0">
+                        <thead>
+                            <tr>
+                                <th app-sortable-th column="id" [orderBy]="orderBy" [ascending]="ascending"
+                                    (clickEvent)="onAscendingChange(!ascending);onOrderByChange('id')">Id
+                                </th>
+                                <th app-sortable-th column="name" [orderBy]="orderBy" [ascending]="ascending"
+                                    (clickEvent)="onAscendingChange(!ascending);onOrderByChange('name')">Nome
+                                </th>
+                                <th column="cssBadgeClass">
+                                    Classe CSS
+                                </th>
+                                <th class="text-center" scope="col">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr app-order-state-row *ngFor="let item of items" [item]="item"></tr>
+                        </tbody>
+                    </table>
+                    <p *ngIf="items!=null && items.length == 0">Non ci sono categorie da mostrare</p>
+                </div>
+                <div class="col-lg-2 pt-3 pe-0 ps-0 pb-3 pe-lg-3 ps-lg-3 pb-lg-0 d-flex flex-grow-1 "
+                    *ngIf="orderVisible">
+                    <app-filter-tab [orderBy]="orderBy" [ascending]="ascending" [columns]="filterColumns"
+                        (ascendingEvent)="onAscendingChange($event)" (orderByEvent)="onOrderByChange($event)">
+                    </app-filter-tab>
+                </div>
+            </div>
+        </app-row>
+        <app-row class="ps-4 pe-4 pb-4">
+            <app-per-page-selector [currentValue]="itemsPerPage"
+                (itemsPerPageChangeEvent)="onItemsPerPageChange($event)"></app-per-page-selector>
+        </app-row>
+        <app-row class="ps-4 pe-4">
+            <app-paginator [currentPage]="currentPage" [count]="count" [perPage]="itemsPerPage"
+                (onPageChangeEvent)="onPageChange($event)"></app-paginator>
+        </app-row>
+    </div>
+
+    <ng-template #loading>
+        <app-row class="d-flex p-4 flex-grow-1 justify-content-center align-items-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </app-row>
+    </ng-template>
+
+</div>

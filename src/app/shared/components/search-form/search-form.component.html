@@ -1,0 +1,12 @@
+<div class="row g-0 m-0">
+    <div class="col-lg-12">
+        <form class="row g-0 m-0" #f="ngForm" (ngSubmit)="onSearchButtonClick()">
+            <div class="col-md-10 col-lg-10 pe-1">
+                <input type="text" name="k" class="form-control" [(ngModel)]="key" />
+            </div>
+            <div class="col-md-2 col-lg-2 mt-1 mt-md-0">
+                <button type="submit" class="btn btn-outline-light" (mousedown)="$event.preventDefault()">Cerca</button>
+            </div>
+        </form>
+    </div>
+</div>

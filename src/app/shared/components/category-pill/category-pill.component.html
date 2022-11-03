@@ -1,0 +1,4 @@
+<li class="nav-item text-center my-1 md-my-0 lg-my-0">
+    <a [routerLink]="['/categoria/',item.slug]"
+        [ngClass]="!isCurrent ? 'nav-link nav-pill-item me-2 text-light':'nav-link nav-pill-item active me-2 text-light'">{{item.name}}</a>
+</li>
