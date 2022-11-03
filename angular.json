@@ -32,8 +32,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/libs/bootstrap/bootstrap.bundle.min.js",
-              "src/libs/chart/chart.min.js"
+              "src/libs/bootstrap/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
