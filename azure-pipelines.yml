@@ -10,5 +10,5 @@ pool:
 
 steps:
 - script: |    
-    echo "$(date +%F).zip"
+    echo "$(Agent.JobName).zip"
   displayName: 'Version code and id'
