@@ -1,4 +1,4 @@
-name: $(date:yyyyMMdd)_$(Build.BuildId)
+name: "$(date:yyyyMMdd) ($(Build.BuildId))"
 
 trigger:
 - main
