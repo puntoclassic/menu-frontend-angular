@@ -9,10 +9,21 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 steps:
+- checkout: self
+  clean: false 
+- task: Cache@2
+  inputs:
+    key: 'npm | "$(Agent.OS)" | client/package-lock.json'
+    restoreKeys: |
+                npm | "$(Agent.OS)"
+    path: $(nodeModulesCache)
+  displayName: Cache Node modules
 - script: |    
-    npm install
+    npm install   
+  displayName: 'Install node modules'
+- script: |        
     ng build
-  displayName: 'npm install and build'
+  displayName: 'Build Angular app'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: 'dist/frontend-angular/browser/'
