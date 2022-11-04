@@ -15,24 +15,6 @@ variables:
  internalbuildcode: $(DayOfMonth).$(Month).$(Year:yyyy)
 
 steps:
-- task: Cache@2
-  inputs:
-    key: 'CachePacchettiNPM'
-    path: 'node_modules'
 - script: |    
-    npm install
-    ng build
-  displayName: 'npm install and build'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: 'dist/frontend-angular/browser/'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(internalbuildcode)_$(Build.BuildId).zip'
-    replaceExistingArchive: true
-  displayName: "Create zip package"
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(internalbuildcode)_$(Build.BuildId).zip'
-    publishLocation: 'pipeline'
-  displayName: "Publish zip package"
+    echo "$(internalbuildcode)_$(Build.BuildId).zip"
+  displayName: 'Version code and id'
