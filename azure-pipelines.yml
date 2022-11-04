@@ -10,5 +10,19 @@ pool:
 
 steps:
 - script: |    
-    echo "$(Agent.JobName).zip"
-  displayName: 'Version code and id'
+    npm install
+    ng build
+  displayName: 'npm install and build'
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'dist/frontend-angular/browser/'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.BuildNumber).zip'
+    replaceExistingArchive: true
+  displayName: "Create zip package"
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.BuildNumber).zip'
+    publishLocation: 'pipeline'
+  displayName: "Publish zip package"
