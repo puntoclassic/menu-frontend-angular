@@ -10,5 +10,5 @@ pool:
 
 steps:
 - script: |    
-    echo "$(Build.DefinitionName).zip"
+    echo "$(date +%F).zip"
   displayName: 'Version code and id'
