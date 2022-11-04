@@ -3,6 +3,9 @@ name: "$(date:yyyyMMdd)$(Build.BuildId)"
 trigger:
 - main
 
+variables:
+  nodeModulesCache: $(System.DefaultWorkingDirectory)/node_modules
+
 pool:
   name: default
   demands:
@@ -13,7 +16,7 @@ steps:
   clean: false 
 - task: Cache@2
   inputs:
-    key: 'npm | "$(Agent.OS)" | client/package-lock.json'
+    key: 'npm | "$(Agent.OS)" | package-lock.json'
     restoreKeys: |
                 npm | "$(Agent.OS)"
     path: $(nodeModulesCache)
