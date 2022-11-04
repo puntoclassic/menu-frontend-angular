@@ -12,7 +12,7 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 variables:
- internalbuildcode: $(DayOfMonth).$(Month).$(Year:yyyy)
+ internalbuildcode: $(Date:yyyyMMdd)
 
 steps:
 - script: |    
