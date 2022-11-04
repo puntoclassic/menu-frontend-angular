@@ -1,4 +1,4 @@
-name: "$(date:yyyyMMdd) ($(Build.BuildId))"
+name: "$(date:yyyyMMdd)$(Build.BuildId)"
 
 trigger:
 - main
@@ -10,5 +10,5 @@ pool:
 
 steps:
 - script: |    
-    echo "$(date:yyyyMMdd)_$(Build.BuildId).zip"
+    echo "($(DayOfYear)$(Build.BuildId).zip"
   displayName: 'Version code and id'
