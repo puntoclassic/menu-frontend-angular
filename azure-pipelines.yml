@@ -1,8 +1,3 @@
-# Node.js with Angular
-# Build a Node.js project that uses Angular.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
 trigger:
 - main
@@ -12,10 +7,9 @@ pool:
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
-variables:
- internalbuildcode: "$(Date:yyyyMMdd)"
+
 
 steps:
 - script: |    
-    echo "$(internalbuildcode)_$(Build.BuildId).zip"
+    echo "$(date:yyyyMMdd)_$(Build.BuildId).zip"
   displayName: 'Version code and id'
