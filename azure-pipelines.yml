@@ -12,6 +12,10 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 steps:
+- task: Cache@2
+  inputs:
+    key: 'CachePacchettiNPM'
+    path: 'node_modules'
 - script: |    
     npm install
     ng build
@@ -21,11 +25,11 @@ steps:
     rootFolderOrFile: 'dist/frontend-angular/browser/'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(BuildInternalCode)'
+    archiveFile: '$(Date:yyyyMMdd)_$(Build.BuildId).zip'
     replaceExistingArchive: true
   displayName: "Create zip package"
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(BuildInternalCode)'
+    targetPath: '$(Date:yyyyMMdd)_$(Build.BuildId).zip'
     publishLocation: 'pipeline'
   displayName: "Publish zip package"
