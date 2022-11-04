@@ -10,5 +10,5 @@ pool:
 
 steps:
 - script: |    
-    echo "($(DayOfYear)$(Build.BuildId).zip"
+    echo "$(Build.DefinitionName).zip"
   displayName: 'Version code and id'
