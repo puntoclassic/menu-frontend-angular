@@ -21,11 +21,11 @@ steps:
     rootFolderOrFile: 'dist/frontend-angular/browser/'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Date:yyyyMMdd)_$(Build.BuildId).zip'
+    archiveFile: '$(BuildInternalCode)'
     replaceExistingArchive: true
   displayName: "Create zip package"
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Date:yyyyMMdd)_$(Build.BuildId).zip'
+    targetPath: '$(BuildInternalCode)'
     publishLocation: 'pipeline'
   displayName: "Publish zip package"
