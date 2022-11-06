@@ -3,31 +3,21 @@ name: "$(date:yyyyMMdd)$(Build.BuildId)"
 trigger:
 - main
 
+variables:
+  nodeModulesCache: $(System.DefaultWorkingDirectory)/node_modules
 
 pool:
   name: default
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
-steps:
-- checkout: self
-  clean: false 
+steps: 
 - script: |    
-    npm install   
-  displayName: 'Install node modules'
+    docker stop menu-frontend-angular-frontend-1
+    docker rm menu-frontend-angular-frontend-1
+    docker image rm menu-frontend-angular-frontend-1 
+  continueOnError: true
+  displayName: 'Clean current docker image'
 - script: |        
-    ng build
-  displayName: 'Build Angular app'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: 'dist/frontend-angular/browser/'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.BuildNumber).zip'
-    replaceExistingArchive: true
-  displayName: "Create zip package"
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.BuildNumber).zip'
-    publishLocation: 'pipeline'
-  displayName: "Publish zip package"
+    docker compose up  --detach
+  displayName: 'Build and start container'
