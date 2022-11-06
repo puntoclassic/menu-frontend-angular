@@ -11,6 +11,7 @@ pool:
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
+<<<<<<< HEAD
 stages:
 - stage: Build
   jobs:
@@ -56,3 +57,16 @@ stages:
         latest
   
 
+=======
+steps:
+- checkout: self
+  clean: false 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker Jonathan'
+    repository: 'puntoclassic/menu-frontend-angular'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: |      
+      latest
+>>>>>>> 018e51a5742b424259e9c54ab1a4c0e79c010479
