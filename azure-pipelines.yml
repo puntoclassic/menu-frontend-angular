@@ -23,16 +23,6 @@ stages:
       displayName: 'Install node modules'     
   displayName: "Build project"
 
-- stage: Test
-  jobs:
-  - job: RunTest
-    steps:
-    - script: |
-        npm install
-        npm test
-    displayName: 'Test project'
-  displayName: "Run tests"
-
 - stage: DistributeLocally
   jobs:
   - job: DistributeLocally
