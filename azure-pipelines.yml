@@ -11,16 +11,15 @@ pool:
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
-steps:
-- checkout: self
-  clean: false 
+steps: 
 - script: |    
     docker stop menu-frontend-angular-frontend-1
     docker rm menu-frontend-angular-frontend-1
     docker image rm menu-frontend-angular-frontend-1 
   displayName: 'Clean current docker image'
 - script: |        
-    docker builder ip
+    docker builder up
+  continueOnError: true
   displayName: 'Build and start container'
 
 
