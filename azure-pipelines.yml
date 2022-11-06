@@ -58,7 +58,7 @@ stages:
 - stage: "DistributeDockerRepository"  
   jobs:
   - deployment: 
-    environment: "Approval"
+    environment: Docker build
     strategy:
         runOnce:
           deploy:
