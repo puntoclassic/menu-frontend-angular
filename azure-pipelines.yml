@@ -16,5 +16,4 @@ steps:
   inputs:
     containerRegistry: 'Docker Jonathan'
     repository: 'puntoclassic / menu-frontend-angular'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    command: 'push'
