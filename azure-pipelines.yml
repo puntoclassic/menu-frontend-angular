@@ -55,20 +55,22 @@ stages:
         displayName: "Publish zip package"
   displayName: "Distribute on local machine"
 
-- stage: "Distribute_docker_repository"  
+- stage: "DistributeDockerRepository"  
   jobs:
   - deployment: 
     environment: "Approval"
-  - job: DistributeDockerRepos
-    steps:
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'Docker Jonathan'
-          repository: 'puntoclassic/menu-frontend-angular'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
-          tags: |      
-            latest
+    strategy:
+        runOnce:
+          deploy:
+            steps: 
+              - task: Docker@2
+                inputs:
+                  containerRegistry: 'Docker Jonathan'
+                  repository: 'puntoclassic/menu-frontend-angular'
+                  command: 'buildAndPush'
+                  Dockerfile: '**/Dockerfile'
+                  tags: |      
+                    latest
   displayName: "Push on docker repository"
     
 
