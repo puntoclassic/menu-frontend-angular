@@ -15,9 +15,9 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker Jonathan'
-    repository: 'puntoclassic / menu-frontend-angular'
+    repository: 'puntoclassic/menu-frontend-angular'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: |
-      $(Build.BuildId) 
+      $(Build.BuildId)
       latest
