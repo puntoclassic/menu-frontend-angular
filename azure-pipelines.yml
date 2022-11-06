@@ -18,4 +18,6 @@ steps:
     repository: 'puntoclassic / menu-frontend-angular'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    tags: '$(Build.BuildId) latest'
+    tags: |
+      $(Build.BuildId) 
+      latest
