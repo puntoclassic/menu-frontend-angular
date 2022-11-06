@@ -30,7 +30,7 @@ stages:
         npm test
     displayName: 'Test projects'
 
-- stage: "Distribute locally"
+- stage: "Distribute_locally"
   jobs:
   - job: DistributeLocally
     steps:
@@ -51,7 +51,7 @@ stages:
           publishLocation: 'pipeline'
         displayName: "Publish zip package"
 
-- stage: "Distribute docker repository"
+- stage: "Distribute_docker_repository"
   jobs:
   - job: DistributeDockerRepos
     steps:
