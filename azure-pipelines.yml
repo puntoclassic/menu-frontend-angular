@@ -28,6 +28,7 @@ stages:
   - job: RunTest
     steps:
     - script: |
+        npm install
         npm test
     displayName: 'Test project'
   displayName: "Run tests"
@@ -54,8 +55,10 @@ stages:
         displayName: "Publish zip package"
   displayName: "Distribute on local machine"
 
-- stage: "Distribute_docker_repository"
+- stage: "Distribute_docker_repository"  
   jobs:
+  - deployment: 
+    environment: "Approval"
   - job: DistributeDockerRepos
     steps:
       - task: Docker@2
