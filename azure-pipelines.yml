@@ -14,45 +14,57 @@ pool:
 stages:
 - stage: Build
   jobs:
+  - job: BuildProject
+    steps:
     - checkout: self
       clean: false 
     - script: |    
-      npm install   
-    displayName: 'Install node modules' 
+        npm install   
+      displayName: 'Install node modules'     
 
 - stage: Test
   jobs:
+  - job: RunTest
+    steps:
     - script: |
-      npm test  
+        npm test
+    displayName: 'Test projects'
 
 - stage: Distribute locally
   jobs:
-    - script: |        
-    ng build
-  displayName: 'Build Angular app'
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: 'dist/frontend-angular/browser/'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.BuildNumber).zip'
-      replaceExistingArchive: true
-    displayName: "Create zip package"
-  - task: PublishPipelineArtifact@1
-    inputs:
-      targetPath: '$(Build.BuildNumber).zip'
-      publishLocation: 'pipeline'
-    displayName: "Publish zip package"
+  - job: DistributeLocally
+    steps:
+      - script: |
+          ng build
+        displayName: 'Build Angular app'
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: 'dist/frontend-angular/browser/'
+          includeRootFolder: true
+          archiveType: 'zip'
+          archiveFile: '$(Build.BuildNumber).zip'
+          replaceExistingArchive: true
+        displayName: "Create zip package"
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Build.BuildNumber).zip'
+          publishLocation: 'pipeline'
+        displayName: "Publish zip package"
 
-- stage: Distribute docker image
+- stage: Distribute docker repository
   jobs:
-    - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker Jonathan'
-      repository: 'puntoclassic/menu-frontend-angular'
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
-      tags: |      
-        latest
-  
+  - job: DistributeDockerRepos
+    steps:
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'Docker Jonathan'
+          repository: 'puntoclassic/menu-frontend-angular'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
+          tags: |      
+            latest
+    
+
+
+
 
