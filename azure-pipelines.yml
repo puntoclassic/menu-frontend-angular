@@ -21,6 +21,7 @@ stages:
     - script: |    
         npm install   
       displayName: 'Install node modules'     
+  displayName: "Build project"
 
 - stage: Test
   jobs:
@@ -28,9 +29,10 @@ stages:
     steps:
     - script: |
         npm test
-    displayName: 'Test projects'
+    displayName: 'Test project'
+  displayName: "Run tests"
 
-- stage: "Distribute_locally"
+- stage: DistributeLocally
   jobs:
   - job: DistributeLocally
     steps:
@@ -50,6 +52,7 @@ stages:
           targetPath: '$(Build.BuildNumber).zip'
           publishLocation: 'pipeline'
         displayName: "Publish zip package"
+  displayName: "Distribute on local machine"
 
 - stage: "Distribute_docker_repository"
   jobs:
@@ -63,6 +66,7 @@ stages:
           Dockerfile: '**/Dockerfile'
           tags: |      
             latest
+  displayName: "Push on docker repository"
     
 
 
