@@ -16,6 +16,7 @@ steps:
     docker stop menu-frontend-angular-frontend-1
     docker rm menu-frontend-angular-frontend-1
     docker image rm menu-frontend-angular-frontend-1 
+  continueOnError: true
   displayName: 'Clean current docker image'
 - script: |        
     docker builder up
