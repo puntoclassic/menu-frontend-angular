@@ -62,7 +62,7 @@ stages:
                   Dockerfile: '**/Dockerfile'
                   tags: |      
                     latest
-              displayName: "Push image to docker repository"
+                displayName: "Push image to docker repository"
   displayName: "Push on docker repository"
     
 
