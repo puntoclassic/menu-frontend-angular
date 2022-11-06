@@ -13,11 +13,11 @@ pool:
 
 steps: 
 - script: |    
-    docker stop menu-frontend-angular-frontend-1
-    docker rm menu-frontend-angular-frontend-1
-    docker image rm menu-frontend-angular-frontend-1 
+    docker stop menu-frontend-container
+    docker rm menu-frontend-container
+    docker image rm menu-frontend-container 
   continueOnError: true
   displayName: 'Clean current docker image'
 - script: |        
-    docker compose up  --detach
+    docker compose -p menu-frontend-container up  --detach
   displayName: 'Build and start container'
