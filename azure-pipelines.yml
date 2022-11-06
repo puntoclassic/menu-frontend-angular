@@ -15,21 +15,12 @@ steps:
 - checkout: self
   clean: false 
 - script: |    
-    npm install   
-  displayName: 'Install node modules'
+    docker stop menu-frontend-angular-frontend-1
+    docker rm menu-frontend-angular-frontend-1
+    docker image rm menu-frontend-angular-frontend-1 
+  displayName: 'Clean current docker image'
 - script: |        
-    ng build
-  displayName: 'Build Angular app'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: 'dist/frontend-angular/browser/'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.BuildNumber).zip'
-    replaceExistingArchive: true
-  displayName: "Create zip package"
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.BuildNumber).zip'
-    publishLocation: 'pipeline'
-  displayName: "Publish zip package"
+    docker builder ip
+  displayName: 'Build and start container'
+
+
