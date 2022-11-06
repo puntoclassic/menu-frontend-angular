@@ -3,8 +3,6 @@ name: "$(date:yyyyMMdd)$(Build.BuildId)"
 trigger:
 - main
 
-variables:
-  nodeModulesCache: $(System.DefaultWorkingDirectory)/node_modules
 
 pool:
   name: default
@@ -15,13 +13,11 @@ steps:
 - checkout: self
   clean: false 
 - script: |    
-    docker stop menu-frontend-angular-frontend-1
-    docker rm menu-frontend-angular-frontend-1
-    docker image rm menu-frontend-angular-frontend-1 
-  displayName: 'Clean current docker image'
+    npm install   
+  displayName: 'Install node modules'
 - script: |        
-    docker builder ip
-  displayName: 'Build and start container'
+    ng build
+  displayName: 'Build Angular app'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: 'dist/frontend-angular/browser/'
