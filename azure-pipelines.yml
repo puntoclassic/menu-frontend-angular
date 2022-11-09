@@ -22,5 +22,5 @@ stages:
           repository: 'puntoclassic/menu-frontend-angular'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
-          tags: 'Latest'
+          tags: 'latest'
   displayName: "Distribuzione immagine docker"
