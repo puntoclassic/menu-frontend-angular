@@ -3,68 +3,22 @@ name: "$(date:yyyyMMdd)$(Build.BuildId)"
 trigger:
 - main
 
-variables:
-  nodeModulesCache: $(System.DefaultWorkingDirectory)/node_modules
-
 pool:
   name: default
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
-stages:
-- stage: Build
-  jobs:
-  - job: BuildProject
-    steps:
-    - checkout: self
-      clean: false 
-    - script: |    
-        npm install   
-      displayName: 'Install node modules'     
-  displayName: "Build project"
+steps: 
+  - task: Docker@2
+      inputs:
+      containerRegistry: 'Docker Jonathan'
+      repository: 'puntoclassic/menu-frontend-angular'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'
+        tags: |      
+          latest
+  displayName: "Distribute container"
 
-- stage: DistributeLocally
-  jobs:
-  - job: DistributeLocally
-    steps:
-      - script: |
-          npm install
-          ng build
-        displayName: 'Build Angular app'
-      - task: ArchiveFiles@2
-        inputs:
-          rootFolderOrFile: 'dist/frontend-angular/browser/'
-          includeRootFolder: true
-          archiveType: 'zip'
-          archiveFile: '$(Build.BuildNumber).zip'
-          replaceExistingArchive: true
-        displayName: "Create zip package"
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: '$(Build.BuildNumber).zip'
-          publishLocation: 'pipeline'
-        displayName: "Publish zip package"
-  displayName: "Distribute on local machine"
-
-- stage: "DistributeDockerRepository"  
-  jobs:
-  - deployment: 
-    environment: Docker build
-    strategy:
-        runOnce:
-          deploy:
-            steps: 
-              - task: Docker@2
-                inputs:
-                  containerRegistry: 'Docker Jonathan'
-                  repository: 'puntoclassic/menu-frontend-angular'
-                  command: 'buildAndPush'
-                  Dockerfile: '**/Dockerfile'
-                  tags: |      
-                    latest
-                displayName: "Push image to docker repository"
-  displayName: "Push on docker repository"
-    
 
 
 
