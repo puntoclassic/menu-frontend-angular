@@ -12,7 +12,7 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 stages:
-- stage: Distribute docker image
+- stage: DistributeDockerImage
   jobs:
   - job:
     steps:
@@ -22,3 +22,4 @@ stages:
           repository: 'puntoclassic/menu-frontend-angular'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
+  displayName: "Distribuzione immagine docker"
