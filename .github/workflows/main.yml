@@ -25,8 +25,10 @@ jobs:
     steps:
       - name: Stop current instance
         run: docker stop menu-frontend-angular
+        continue-on-error: true
       - name: Delete current instance
-        run: docker rm menu-frontend-angular  
+        run: docker rm menu-frontend-angular 
+        continue-on-error: true
       - name: Start new instance
         run: docker run -d --name menu-frontend-angular -p 80:80
       
