@@ -30,6 +30,7 @@ jobs:
       - name: Start new instance
         run: docker run -d --name menu-frontend-angular -p 80:80
       
+      
     
     
       
