@@ -15,7 +15,17 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3      
+        uses: actions/checkout@v3
+      - name: docker login
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+          logout: false        
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag latest      
+      - name: Docker Push
+        run: docker push puntoclassic/menu-frontend-angular       
   deploy:
     name: Deploy docker image
     runs-on: self-hosted
@@ -32,7 +42,7 @@ jobs:
       - name: Start new instance
         run: docker run -d --name menu-frontend-angular -p 80:80 puntoclassic/menu-frontend-angular
       
-      
+
     
     
       
