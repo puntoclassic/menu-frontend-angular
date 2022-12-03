@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
-import { catchError, map, Observable, of, skip, take, tap } from "rxjs";
+import { map, Observable } from "rxjs";
 import { AccountService } from "src/app/account/services/account.service";
 import { AppService } from "src/app/shared/services/app.service";
 
@@ -48,29 +48,5 @@ export class LoginRequiredGuard implements CanActivate {
         }
       }),
     );
-
-    /*
-    AD OGNI PAGINA CHE RICHIEDE IL LOGIN VERIFICA LO STATO DEL UTENTE
-    return this.accountService.getAccountState().pipe(
-      map((response) => {
-        this.accountService.loadAccountState();
-
-        return true;
-      }),
-      catchError((err, caught) => {
-        this.router.navigate(["/account/login"], {
-          queryParams: {
-            backUrl: state.url,
-          },
-        }).then(() => {
-          this.appService.pushMessage(
-            "error",
-            "Questa pagina richiede l'accesso",
-          );
-        });
-        return caught;
-      }),
-    );
-    */
   }
 }

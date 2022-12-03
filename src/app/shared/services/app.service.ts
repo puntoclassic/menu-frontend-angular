@@ -20,7 +20,12 @@ export class AppService {
   }
 
   fetchCategories() {
-    this.http.get<[]>("api/categories").pipe(map((response) => {
+    this.http.get<[]>("api/categories", {
+      params: {
+        "paginated": false,
+      },
+    }).pipe(map((response: any) => {
+
       return response.map((item: any) => {
         return {
           slug: item.slug,
@@ -28,6 +33,14 @@ export class AppService {
         };
       });
     })).subscribe((data: any) => this.categories.next(data));
+  }
+
+  searchFoods(search: string) {
+    return this.http.get<[]>("api/foods/cerca", {
+      params: {
+        search: search,
+      },
+    });
   }
 
   pushMessage(type: string, msg: string) {

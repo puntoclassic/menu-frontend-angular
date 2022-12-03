@@ -63,6 +63,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     );
 
     this.fetchFoods().subscribe((response) => {
+      console.log(response);
       this.foods = response;
     });
   }

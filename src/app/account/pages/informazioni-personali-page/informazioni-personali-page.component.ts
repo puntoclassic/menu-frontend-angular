@@ -61,21 +61,23 @@ export class InformazioniPersonaliPageComponent implements OnInit, OnDestroy {
   onFormSubmit(data: PersonalInfoUpdateRequest) {
     if (this.form.valid) {
       this.isPending = true;
-      this.accountService.updatePersonalInfo(data).subscribe((response) => {
-        if (response) {
-          this.appService.pushMessage(
-            "success",
-            "Informazioni aggiornate con successo",
-          );
-          this.accountService.loadAccountState();
-        } else {
-          this.appService.pushMessage(
-            "error",
-            "Impossibile aggiornare le informazioni",
-          );
-        }
-        this.isPending = false;
-      });
+      this.accountService.updatePersonalInfo(data).subscribe(
+        (response) => {
+          if (response) {
+            this.appService.pushMessage(
+              "success",
+              "Informazioni aggiornate con successo",
+            );
+            this.accountService.loadAccountState();
+          } else {
+            this.appService.pushMessage(
+              "error",
+              "Impossibile aggiornare le informazioni",
+            );
+          }
+          this.isPending = false;
+        },
+      );
     }
   }
 }

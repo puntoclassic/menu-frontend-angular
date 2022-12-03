@@ -17,8 +17,17 @@
         <app-row>
             <app-category-pills></app-category-pills>
         </app-row>
-        <app-row>
+        <app-row class="d-flex flex-grow-1">
 
+            <div class="col-lg-12 p-4 d-flex flex-grow-1 flex-column">
+                <div class="row g-0">
+                    <h4 class="fw-light">Risultati di ricerca per "{{key}}"</h4>
+                </div>
+                <div class="row g-0">
+                    <p *ngIf="foods.length == 0">Nessun risultato trovato</p>
+                    <app-food-item *ngFor="let item of foods" [item]="item" [showCategoryPill]="false"></app-food-item>
+                </div>
+            </div>
         </app-row>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { InjectionToken, NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AddToCartButtonComponent } from "src/app/shared/components/add-to-cart-button/add-to-cart-button.component";
 import { CartButtonComponent } from "src/app/shared/components/cart-button/cart-button.component";
@@ -33,6 +33,8 @@ import { LoadingPageComponent } from "src/app/shared/components/loading-page/loa
 export function httpTranslateLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
+
+export const BACKEND_URL = new InjectionToken<string>("BACKEND_URL");
 
 @NgModule({
   declarations: [
@@ -69,17 +71,21 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: ApiServerInterceptor,
-    multi: true,
-  }, {
-    provide: "BACKEND_URL",
-    useValue: "http://localhost:4000",
-  }, {
-    provide: TitleStrategy,
-    useClass: TemplatePageTitleStrategy,
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiServerInterceptor,
+      multi: true,
+    },
+    {
+      provide: BACKEND_URL,
+      useValue: "http://localhost:4000",
+    },
+    {
+      provide: TitleStrategy,
+      useClass: TemplatePageTitleStrategy,
+    },
+  ],
   exports: [
     CommonModule,
     BrowserModule,

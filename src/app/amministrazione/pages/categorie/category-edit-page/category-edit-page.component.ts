@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, inject, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { catchError, map, throwError } from "rxjs";
 import { CategoryService } from "src/app/amministrazione/services/category.service";
 import { AppService } from "src/app/shared/services/app.service";
+import { BACKEND_URL } from "src/app/shared/shared.module";
 
 @Component({
   selector: "app-category-edit-page",
@@ -22,6 +23,7 @@ export class CategoryEditPageComponent implements OnInit {
   immagineControl: AbstractControl;
   id: number;
   currentImageUrl?: string;
+  private backendUrl = inject(BACKEND_URL);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +31,6 @@ export class CategoryEditPageComponent implements OnInit {
     private appService: AppService,
     private router: Router,
     private currentRoute: ActivatedRoute,
-    @Inject("BACKEND_URL") private backendUrl: string,
   ) {
     this.currentRoute.params.subscribe((params: Params) => {
       this.id = params.id;

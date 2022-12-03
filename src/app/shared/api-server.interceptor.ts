@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@angular/core";
+import { Inject, inject, Injectable, InjectionToken } from "@angular/core";
 import {
   HttpEvent,
   HttpHandler,
@@ -6,10 +6,11 @@ import {
   HttpRequest,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { BACKEND_URL } from "src/app/shared/shared.module";
 
 @Injectable()
 export class ApiServerInterceptor implements HttpInterceptor {
-  constructor(@Inject("BACKEND_URL") private backendUrl: string) {}
+  private backendUrl = inject(BACKEND_URL);
 
   intercept(
     request: HttpRequest<unknown>,

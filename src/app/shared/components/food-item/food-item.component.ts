@@ -10,7 +10,7 @@ export class FoodItemComponent implements OnInit {
   item: any;
 
   @Input()
-  showCategoryPill: boolean = false;
+  category: any;
 
   priceFormatted: string;
 

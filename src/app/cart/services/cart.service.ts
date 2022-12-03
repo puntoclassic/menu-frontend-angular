@@ -54,16 +54,26 @@ export class CartService {
   }
 
   fetchFromCookie() {
-    this.http.get("api/cart/cookie").subscribe((items: string) => {
-      var state = this.cartStatus.getValue();
-      state.items = items;
+    this.http.get("api/cart/cookie").subscribe({
+      next: (value: any) => {
+        var state = this.cartStatus.getValue();
+        state.items = value.cart ?? value;
 
-      this.notififyChange(state);
+        this.notififyChange(state);
+      },
+      error: () => {
+        var state = this.cartStatus.getValue();
+        state.items = {};
+
+        this.notififyChange(state);
+      },
     });
   }
 
   addToCart(item: any) {
     var state = this.cartStatus.getValue();
+
+    console.log(item);
 
     state.items[item.id] = {
       item: item,
@@ -109,7 +119,8 @@ export class CartService {
 
     state.total = total;
 
-    this.http.post("api/cart/cookie", { cart: state.items }).subscribe();
+    this.http.post("api/cart/cookie", { cart: state.items })
+      .subscribe();
 
     this.cartStatus.next(state);
   }
