@@ -1,0 +1,36 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Publish and deplo docker image
+
+on: [workflow_dispatch]
+
+jobs:        
+  deploy:
+    name: Deploy docker image
+    runs-on: self-hosted
+    environment: production
+    needs:
+      push_to_registry
+    steps:
+      - name: Stop current instance
+        run: docker stop menu-frontend-angular
+        continue-on-error: true
+      - name: Delete current instance
+        run: docker rm menu-frontend-angular 
+        continue-on-error: true
+      - name: Start new instance
+        run: docker run -d --name menu-frontend-angular -p 80:80 puntoclassic/menu-frontend-angular
+      
+
+    
+    
+      
+    
+
+
+
+    
+    
+      
+    
