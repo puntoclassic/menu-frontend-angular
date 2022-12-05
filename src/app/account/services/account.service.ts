@@ -65,14 +65,13 @@ export class AccountService {
     var userLogged = this.userLogged$;
     var user$ = this.user$;
     return new Observable((emitter) => {
-      this.http.post<{ token?: string }>("api/account/login", {
+      this.http.post<{ user?: any }>("api/account/login", {
         email: email,
         password: password,
       })
         .subscribe({
           next(value) {
-            var { token } = value;
-            var user: any = jwt_decode(token);
+            var { user } = value;
 
             if (user.verified) {
               //login ok

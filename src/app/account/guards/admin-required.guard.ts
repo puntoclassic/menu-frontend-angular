@@ -17,7 +17,6 @@ export class AdminRequiredGuard implements CanActivate {
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private appService: AppService,
   ) {
   }
 
@@ -34,8 +33,7 @@ export class AdminRequiredGuard implements CanActivate {
         if (user && user.role === "admin") {
           return true;
         } else {
-          this.router.navigate(["/403"]);
-          return false;
+          return this.router.createUrlTree(["/403"]);
         }
       }),
     );

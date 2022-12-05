@@ -37,26 +37,11 @@ export class AnonymousRequiredGuard implements CanActivate {
     return this.accountService.userLogged$.pipe(
       map((status) => {
         if (status) {
-          this.router.navigate(["/account"]);
-          return false;
+          return this.router.createUrlTree(["/account"]);
         } else {
           return true;
         }
       }),
     );
-
-    /**
-     * VERIFICA VIA SERVER SE L'UTENTE NON HA EFFETTUATO ACCESSO
-
-    return this.accountService.getAccountState().pipe(
-      map(() => {
-        this.router.navigate(["/account"]);
-        return false;
-      }),
-      catchError(() => {
-        return of(true);
-      }),
-    );
-     */
   }
 }

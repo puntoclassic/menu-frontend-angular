@@ -9,7 +9,7 @@ jobs:
   deploy:
     name: Deploy docker image
     runs-on: self-hosted
-    environment: production    
+    environment: development    
     steps:
       - name: Stop current instance
         run: docker stop menu-frontend-angular
