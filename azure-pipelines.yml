@@ -19,7 +19,7 @@ stages:
           displayName: 'Compila'              
         - task: PublishPipelineArtifact@1
           inputs:
-            targetPath: '$(Build.SourcesDirectory)/dist/frontend-angualar/browser/'
+            targetPath: '$(Build.SourcesDirectory)/dist/frontend-angular/browser/'
             publishLocation: 'pipeline'
           displayName: "Pubblica artefatto"
         
