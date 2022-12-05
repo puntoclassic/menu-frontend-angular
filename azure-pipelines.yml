@@ -11,8 +11,7 @@ pool:
 stages:
 - stage: BuildVersion  
   jobs:    
-    - job:  
-      container: 
+    - job:        
       steps:
         - script: npm install
           displayName: 'Installa dipendenze'
