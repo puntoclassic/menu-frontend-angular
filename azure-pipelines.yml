@@ -15,6 +15,6 @@ stages:
       steps:
         - script: npm install
           displayName: 'Installa dipendenze'        
-        - script: npm build
+        - script: npm run build
           displayName: 'Compila'
   displayName: "Compila la versione"
