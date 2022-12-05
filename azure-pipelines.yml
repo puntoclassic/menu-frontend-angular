@@ -14,9 +14,7 @@ stages:
     - job:        
       steps:
         - script: npm install
-          displayName: 'Installa dipendenze'
-        - script: npm test
-          displayName: 'Esegui test'
+          displayName: 'Installa dipendenze'        
         - script: npm build
           displayName: 'Compila'
   displayName: "Compila la versione"
