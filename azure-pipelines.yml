@@ -3,24 +3,21 @@ name: "$(date:yyyyMMdd)$(Build.BuildId)"
 trigger:
 - main
 
-variables:
-  nodeModulesCache: $(System.DefaultWorkingDirectory)/node_modules
-
 pool:
   name: default
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 stages:
-- stage: DistributeDockerImage
-  jobs:
-  - job:
-    steps:
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'Docker Jonathan'
-          repository: 'puntoclassic/menu-frontend-angular'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
-          tags: 'latest'
-  displayName: "Distribuzione immagine docker"
+- stage: BuildVersion  
+  jobs:    
+    - job:  
+      container: 
+      steps:
+        - script: npm install
+          displayName: 'Installa dipendenze'
+        - script: npm test
+          displayName: 'Esegui test'
+        - script: npm build
+          displayName: 'Compila'
+  displayName: "Compila la versione"
