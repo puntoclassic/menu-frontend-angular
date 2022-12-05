@@ -16,10 +16,10 @@ stages:
         - script: npm install
           displayName: 'Installa dipendenze'        
         - script: npm run build
-          displayName: 'Compila'        
+          displayName: 'Compila'              
         - task: PublishPipelineArtifact@1
           inputs:
-            targetPath: '$(Pipeline.Workspace)/dist/frontend-angualar/browser/'
+            targetPath: '$(Build.BinariesDirectory)/dist/frontend-angualar/browser/'
             publishLocation: 'pipeline'
           displayName: "Pubblica artefatto"
         
