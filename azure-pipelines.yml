@@ -1,7 +1,7 @@
 name: "$(date:yyyyMMdd)$(Build.BuildId)"
 
 trigger:
-- main
+- master
 
 pool:
   name: default
