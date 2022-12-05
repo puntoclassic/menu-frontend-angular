@@ -17,4 +17,13 @@ stages:
           displayName: 'Installa dipendenze'        
         - script: npm run build
           displayName: 'Compila'
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(Build.BinariesDirectory)/dist/frontend-angular/browser/'
+            includeRootFolder: true
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+            replaceExistingArchive: true
+          displayName: "Crea pacchetto zip"
+        
   displayName: "Compila la versione"
