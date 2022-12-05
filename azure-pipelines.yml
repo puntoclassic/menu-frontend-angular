@@ -16,14 +16,11 @@ stages:
         - script: npm install
           displayName: 'Installa dipendenze'        
         - script: npm run build
-          displayName: 'Compila'
-        - task: ArchiveFiles@2
+          displayName: 'Compila'        
+        - task: PublishPipelineArtifact@1
           inputs:
-            rootFolderOrFile: '$(Build.BinariesDirectory)/dist/frontend-angular/browser/*'
-            includeRootFolder: true
-            archiveType: 'zip'
-            archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-            replaceExistingArchive: true
-          displayName: "Crea pacchetto zip"
+            targetPath: '$(Pipeline.Workspace)/dist/frontend-angualar/browser/'
+            publishLocation: 'pipeline'
+          displayName: "Pubblica artefatto"
         
   displayName: "Compila la versione"
