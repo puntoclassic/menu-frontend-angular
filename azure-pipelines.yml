@@ -23,7 +23,7 @@ stages:
       dependsOn: Test 
 - stage: Deploy
   dependsOn: Testing
-  condition: success()
+  condition: succeeded()
   displayName: "Deploy versione"  
   jobs:    
     - deployment: 
