@@ -9,7 +9,8 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 stages:
-- stage: BuildVersion  
+- stage: Testing 
+  displayName: "Test di versione"
   jobs:   
     - job: Test             
       steps:
@@ -19,16 +20,27 @@ stages:
           displayName: 'Esegui test' 
       displayName: "Test versione"
     - job: Build   
-      dependsOn: Test    
-      steps:
-        - script: npm install
-          displayName: 'Installa dipendenze'        
-        - script: npm run build
-          displayName: 'Compila'              
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(Build.SourcesDirectory)/dist/frontend-angular/browser/'
-            publishLocation: 'pipeline'
-          displayName: "Pubblica artefatto"        
-      displayName: "Pubblicazione versione" 
-    
+      dependsOn: Test 
+- stage: Deploy
+  dependsOn: Testing
+  condition: success()
+  displayName: "Deploy versione"  
+  jobs:    
+    - deployment: 
+      displayName: "Distribuzione versione"
+      environment: Production
+      strategy:
+        runOnce:
+          deploy:
+            steps:              
+              - script: npm install
+                displayName: 'Installa dipendenze'        
+              - script: npm run build
+                displayName: 'Compila'              
+              - task: PublishPipelineArtifact@1
+                inputs:
+                  targetPath: '$(Build.SourcesDirectory)/dist/frontend-angular/browser/'
+                  publishLocation: 'pipeline'
+                displayName: "Pubblica artefatto"        
+          
+
