@@ -18,9 +18,7 @@ stages:
           displayName: 'Installa dipendenze'        
         - script: npm run test-ci
           displayName: 'Esegui test' 
-      displayName: "Test versione"
-    - job: Build   
-      dependsOn: Test 
+      displayName: "Test versione"     
 - stage: Deploy
   dependsOn: Testing
   condition: succeeded()
