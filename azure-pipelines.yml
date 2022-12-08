@@ -11,15 +11,15 @@ pool:
 stages:
 - stage: BuildVersion  
   jobs:   
-    - test:        
+    - job: Test             
       steps:
         - script: npm install
           displayName: 'Installa dipendenze'        
         - script: npm run test-ci
           displayName: 'Esegui test' 
       displayName: "Test versione"
-    - deploy:    
-      needs: test     
+    - job: Build   
+      dependsOn: Test    
       steps:
         - script: npm install
           displayName: 'Installa dipendenze'        
@@ -30,5 +30,5 @@ stages:
             targetPath: '$(Build.SourcesDirectory)/dist/frontend-angular/browser/'
             publishLocation: 'pipeline'
           displayName: "Pubblica artefatto"        
-    displayName: "Pubblicazione versione" 
+  displayName: "Pubblicazione versione" 
     
