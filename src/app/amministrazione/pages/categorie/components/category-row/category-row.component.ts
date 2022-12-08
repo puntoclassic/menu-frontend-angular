@@ -8,7 +8,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 })
 export class CategoryRowComponent implements OnInit {
   @Input("category")
-  category: any;
+  category?: any;
 
   constructor() {
   }

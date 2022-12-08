@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit {
       "password": ["", Validators.required],
     });
     this.route.queryParams.subscribe((params: Params) => {
-      this.loginForm.controls["backUrl"].setValue(params.backUrl ?? null);
+      this.loginForm.controls["backUrl"].setValue(params?.backUrl ?? null);
     });
   }
 

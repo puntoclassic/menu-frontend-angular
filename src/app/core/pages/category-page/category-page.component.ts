@@ -33,7 +33,6 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private title: Title,
-    private appService: AppService,
     private categoryService: CategoryService,
     private foodService: FoodService,
     private settingService: SettingsService,
@@ -47,9 +46,10 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
   }
 
   initContent() {
-    this.fetchCategoryInfo().subscribe(
+    this.categoryService.getCategoryBySlug(this.slug).subscribe(
       (response) => {
         //set page title by category name
+
         this.settings$ = this.settingService.settings.subscribe(
           (settings: any) => {
             this.title.setTitle(
@@ -63,16 +63,11 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
     );
 
     this.fetchFoods().subscribe((response) => {
-      console.log(response);
       this.foods = response;
     });
   }
 
   ngOnInit(): void {
-  }
-
-  fetchCategoryInfo() {
-    return this.categoryService.getCategoryBySlug(this.slug);
   }
 
   fetchFoods() {

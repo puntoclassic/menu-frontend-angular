@@ -8,6 +8,7 @@ import {
 import { AbstractControl, FormBuilder } from "@angular/forms";
 
 import { Chart, registerables } from "chart.js";
+import { HeaderComponent } from "src/app/shared/components/header/header.component";
 Chart.register(...registerables);
 
 @Component({
@@ -16,16 +17,10 @@ Chart.register(...registerables);
   styleUrls: ["./home-page.component.scss"],
 })
 export class HomePageComponent implements OnInit {
-  valore: string = "Ciao mondo";
-
-  valori: string = "Red,Blue,Yellow,Green,Purple,Orange";
-
-  valoriField: AbstractControl;
+  @ViewChild(HeaderComponent)
+  header: HeaderComponent;
 
   constructor(private formBuilder: FormBuilder) {
-    this.valoriField = this.formBuilder.control(
-      "Catania,Palermo,Siracusa,Messina,Enna",
-    );
   }
 
   ngOnInit(): void {

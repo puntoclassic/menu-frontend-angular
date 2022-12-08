@@ -27,7 +27,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
   @Output()
   onPageChangeEvent: EventEmitter<number> = new EventEmitter();
 
-  numberOfPages: number[];
+  numberOfPages: number[] = [];
 
   constructor() {
   }

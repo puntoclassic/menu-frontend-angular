@@ -79,7 +79,7 @@ export const BACKEND_URL = new InjectionToken<string>("BACKEND_URL");
     },
     {
       provide: BACKEND_URL,
-      useValue: "http://localhost:8080",
+      useValue: "http://localhost:4000",
     },
     {
       provide: TitleStrategy,

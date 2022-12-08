@@ -19,7 +19,7 @@ export class CategoryPillComponent implements OnInit, OnDestroy {
   routeStream = new Subscription();
 
   @Input()
-  item: { id: number; name: string; slug: string };
+  item?: { id: number; name: string; slug: string };
   constructor(private router: Router) {
     this.routeStream = this.router.events.pipe(
       filter((f) => f instanceof NavigationEnd),
@@ -30,7 +30,9 @@ export class CategoryPillComponent implements OnInit, OnDestroy {
   }
 
   updateIsCurrent() {
-    this.isCurrent = this.router.url.endsWith(this.item.slug);
+    if (this.item) {
+      this.isCurrent = this.router.url.endsWith(this.item.slug);
+    }
   }
 
   ngOnDestroy(): void {

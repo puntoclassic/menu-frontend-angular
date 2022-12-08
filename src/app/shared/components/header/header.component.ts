@@ -8,14 +8,16 @@ import { AppService } from "src/app/shared/services/app.service";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  settings: any;
+  siteName: string;
+  siteSubTitle: string;
 
   constructor(private settingService: SettingsService) {
   }
 
   ngOnInit(): void {
     this.settingService.settings.subscribe((data) => {
-      this.settings = data;
+      this.siteName = data.site_name;
+      this.siteSubTitle = data.site_subtitle;
     });
   }
 }

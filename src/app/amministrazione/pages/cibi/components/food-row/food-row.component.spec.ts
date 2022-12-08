@@ -1,23 +1,39 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { PriceOutputPipe } from "src/app/shared/pipes/price-output.pipe";
+import { SharedModule } from "src/app/shared/shared.module";
+import { fakeSettingsData } from "src/app/test/fakeSettingsData";
 
-import { FoodRowComponent } from './food-row.component';
+import { FoodRowComponent } from "./food-row.component";
 
-describe('FoodRowComponent', () => {
+describe("FoodRowComponent", () => {
   let component: FoodRowComponent;
   let fixture: ComponentFixture<FoodRowComponent>;
 
   beforeEach(async () => {
+    fakeSettingsData();
     await TestBed.configureTestingModule({
-      declarations: [ FoodRowComponent ]
+      imports: [
+        SharedModule,
+        RouterTestingModule.withRoutes([]),
+      ],
+      declarations: [FoodRowComponent, PriceOutputPipe],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FoodRowComponent);
     component = fixture.componentInstance;
+    component.food = {
+      id: 1,
+      name: "test",
+      category: {
+        name: "test",
+      },
+    };
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

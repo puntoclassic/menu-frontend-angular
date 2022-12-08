@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from "@angular/core";
+import { CategoryService } from "src/app/amministrazione/services/category.service";
 import { AppService } from "src/app/shared/services/app.service";
 
 @Component({
@@ -9,10 +10,10 @@ import { AppService } from "src/app/shared/services/app.service";
 export class CategoryPillsComponent implements OnInit {
   items: [];
 
-  appService = inject(AppService);
+  categoryService = inject(CategoryService);
 
   ngOnInit(): void {
-    this.appService.categories.subscribe((categories) => {
+    this.categoryService.categories.subscribe((categories) => {
       this.items = categories;
     });
   }

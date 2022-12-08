@@ -13,8 +13,9 @@ import { ResetPasswordTokenPageComponent } from "src/app/account/pages/reset-pas
 import { VerificaAccountPageComponent } from "src/app/account/pages/verifica-account-page/verifica-account-page.component";
 import { VerificaAccountTokenPageComponent } from "src/app/account/pages/verifica-account-token-page/verifica-account-token-page.component";
 import { AnonymousRequiredGuard } from "src/app/account/guards/anonymous-required.guard";
+import { AccountPageAdminLinksComponent } from './components/account-page-admin-links/account-page-admin-links.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "account",
     children: [
@@ -78,6 +79,7 @@ const routes: Routes = [
     SigninPageComponent,
     VerificaAccountPageComponent,
     VerificaAccountTokenPageComponent,
+    AccountPageAdminLinksComponent,
   ],
   imports: [
     CommonModule,

@@ -28,7 +28,20 @@ export class CartService {
   constructor(
     private http: HttpClient,
   ) {
-    this.fetchFromCookie();
+    this.fetchFromCookie().subscribe({
+      next: (value: any) => {
+        var state = this.cartStatus.getValue();
+        state.items = value.cart ?? value;
+
+        this.notififyChange(state);
+      },
+      error: () => {
+        var state = this.cartStatus.getValue();
+        state.items = {};
+
+        this.notififyChange(state);
+      },
+    });
   }
 
   updateIndirizzoOrario(indirizzo: string, orario: string) {
@@ -54,26 +67,11 @@ export class CartService {
   }
 
   fetchFromCookie() {
-    this.http.get("api/cart/cookie").subscribe({
-      next: (value: any) => {
-        var state = this.cartStatus.getValue();
-        state.items = value.cart ?? value;
-
-        this.notififyChange(state);
-      },
-      error: () => {
-        var state = this.cartStatus.getValue();
-        state.items = {};
-
-        this.notififyChange(state);
-      },
-    });
+    return this.http.get("api/cart/cookie");
   }
 
   addToCart(item: any) {
     var state = this.cartStatus.getValue();
-
-    console.log(item);
 
     state.items[item.id] = {
       item: item,
@@ -110,6 +108,11 @@ export class CartService {
     this.notififyChange(state);
   }
 
+  sendCartToServer(state) {
+    this.http.post("api/cart/cookie", { cart: state.items })
+      .subscribe();
+  }
+
   notififyChange(state: CartState) {
     var total = 0;
     Object.values(state.items).forEach((row: any) => {
@@ -119,8 +122,7 @@ export class CartService {
 
     state.total = total;
 
-    this.http.post("api/cart/cookie", { cart: state.items })
-      .subscribe();
+    this.sendCartToServer(state);
 
     this.cartStatus.next(state);
   }

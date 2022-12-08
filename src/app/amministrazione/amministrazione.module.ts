@@ -25,7 +25,7 @@ import { OrderStateRowComponent } from "./pages/orderState/components/order-stat
 import { FilterTabComponent } from "./components/filter-tab/filter-tab.component";
 import { ImpostazioniGeneraliPageComponent } from "./pages/impostazioni-generali-page/impostazioni-generali-page.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "amministrazione",
     canActivate: [

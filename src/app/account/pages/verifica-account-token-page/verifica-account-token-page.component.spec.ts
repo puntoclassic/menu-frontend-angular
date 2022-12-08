@@ -1,23 +1,57 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from "@angular/common/http";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ActivatedRoute } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
+import { of } from "rxjs";
+import { AccountService } from "src/app/account/services/account.service";
+import { AppService } from "src/app/shared/services/app.service";
+import { SharedModule } from "src/app/shared/shared.module";
+import { fakeAppData } from "src/app/test/fakeAppData";
+import { fakeCategoryData } from "src/app/test/fakeCategoryData";
+import { fakeEmptyCartData } from "src/app/test/fakeEmptyCartData";
+import { fakeGuestAccountData } from "src/app/test/fakeGuestAccountData";
+import { fakeSettingsData } from "src/app/test/fakeSettingsData";
 
-import { VerificaAccountTokenPageComponent } from './verifica-account-token-page.component';
+import { VerificaAccountTokenPageComponent } from "./verifica-account-token-page.component";
 
-describe('VerificaAccountTokenPageComponent', () => {
+describe("VerificaAccountTokenPageComponent", () => {
   let component: VerificaAccountTokenPageComponent;
   let fixture: ComponentFixture<VerificaAccountTokenPageComponent>;
 
   beforeEach(async () => {
+    fakeEmptyCartData();
+    fakeCategoryData();
+    fakeSettingsData();
+
+    fakeGuestAccountData();
+
     await TestBed.configureTestingModule({
-      declarations: [ VerificaAccountTokenPageComponent ]
+      imports: [
+        SharedModule,
+        RouterTestingModule.withRoutes([]),
+      ],
+      declarations: [VerificaAccountTokenPageComponent],
+      providers: [
+        AccountService,
+        AppService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of({
+              token: "testtoken",
+            }),
+          },
+        },
+      ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(VerificaAccountTokenPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

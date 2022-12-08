@@ -35,6 +35,14 @@ export class FoodService {
     return this.http.post("api/admin/food/create/", data);
   }
 
+  searchFoods(search: string) {
+    return this.http.get<any[]>("api/foods/cerca", {
+      params: {
+        search: search,
+      },
+    });
+  }
+
   updateFood(id: number, data: UpdateFoodData) {
     data.id = id;
     data.price = parseFloat(data.price.toString().replace(",", "."));

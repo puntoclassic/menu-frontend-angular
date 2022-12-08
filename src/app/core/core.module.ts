@@ -7,9 +7,8 @@ import { NotFoundPageComponent } from "src/app/core/pages/not-found-page/not-fou
 import { SharedModule } from "src/app/shared/shared.module";
 
 import { AccessoNegatoPageComponent } from "./pages/accesso-negato-page/accesso-negato-page.component";
-import { GraficoComponent } from "./components/grafico/grafico.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
@@ -44,7 +43,6 @@ const routes: Routes = [
     CercaPageComponent,
     NotFoundPageComponent,
     AccessoNegatoPageComponent,
-    GraficoComponent,
   ],
   imports: [
     SharedModule,

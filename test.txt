@@ -1,0 +1,119 @@
+07 12 2022 20:41:14.172:WARN [karma]: No captured browser, open http://localhost:4200/
+07 12 2022 20:41:14.179:INFO [karma-server]: Karma v6.4.1 server started at http://localhost:4200/
+07 12 2022 20:41:14.179:INFO [launcher]: Launching browsers Chrome with concurrency unlimited
+07 12 2022 20:41:14.181:INFO [launcher]: Starting browser Chrome
+07 12 2022 20:41:15.021:INFO [Chrome 108.0.0.0 (Mac OS 10.15.7)]: Connected on socket m3PgjFYn5HQMkBzWAAAB with id 21310847
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 0 of 71[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 1 of 71[32m SUCCESS[39m (0 secs / 0.105 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[32m SUCCESS[39m (0 secs / 0.109 secs)
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/cart/cookie: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/cart/cookie: 0 Unknown Error
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/cart/cookie: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/cart/cookie: 0 Unknown Error
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[31m ERROR[39m (0.121 secs / 0.109 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 0 of 71[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 1 of 71[32m SUCCESS[39m (0 secs / 0.127 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 2 of 71[32m SUCCESS[39m (0 secs / 0.137 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 3 of 71[32m SUCCESS[39m (0 secs / 0.141 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 4 of 71[32m SUCCESS[39m (0 secs / 0.152 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 5 of 71[32m SUCCESS[39m (0 secs / 0.154 secs)
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[32m SUCCESS[39m (0 secs / 0.155 secs)
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/cart/cookie: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m ERROR[39m (0 secs / 0.155 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/cart/cookie: 0 Unknown Error
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m ERROR[39m (0.175 secs / 0.155 secs)
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m ERROR[39m (0.175 secs / 0.155 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m ERROR[39m (0.175 secs / 0.155 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  An error was thrown in afterAll
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/setting/: 0 Unknown Error
+  HttpErrorResponse: Http failure response for http://localhost:8080/api/categories: 0 Unknown Error
+07 12 2022 20:42:15.739:WARN [Chrome 108.0.0.0 (Mac OS 10.15.7)]: Disconnected (0 times) , because no message in 30000 ms.
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  Disconnected , because no message in 30000 ms.
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m DISCONNECTED[39m (30.582 secs / 0.155 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  Disconnected , because no message in 30000 ms.
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m DISCONNECTED[39m (30.582 secs / 0.155 secs)
+07 12 2022 20:42:20.287:WARN [karma]: No captured browser, open http://localhost:4200/
+[1A[2KChrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m DISCONNECTED[39m (35.132 secs / 0.155 secs)
+07 12 2022 20:44:36.611:WARN [karma]: No captured browser, open http://localhost:4200/
+07 12 2022 20:44:42.935:WARN [Chrome 108.0.0.0 (Mac OS 10.15.7)]: Disconnected (1 times) Client disconnected from CONNECTED state (transport close)
+[1A[2K[31mChrome 108.0.0.0 (Mac OS 10.15.7) ERROR[39m
+  Disconnected Client disconnected from CONNECTED state (transport close)
+Chrome 108.0.0.0 (Mac OS 10.15.7): Executed 6 of 71[31m DISCONNECTED[39m (35.132 secs / 0.155 secs)
+Chrome 108.0.0.0 (Mac OS 10.15.7) ERROR
+  Disconnected Client disconnected from CONNECTED state (transport close)

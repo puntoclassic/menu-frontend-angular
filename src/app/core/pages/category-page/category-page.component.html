@@ -30,7 +30,7 @@
                 </div>
                 <div class="row g-0">
                     <p *ngIf="foods.length == 0">Non ci sono cibi per questa categoria</p>
-                    <app-food-item *ngFor="let item of foods" [item]="item" [showCategoryPill]="false"></app-food-item>
+                    <app-food-item *ngFor="let item of foods" [item]="item"></app-food-item>
                 </div>
             </div>
         </app-row>

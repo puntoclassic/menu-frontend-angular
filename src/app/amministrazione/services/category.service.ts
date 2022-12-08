@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, map } from "rxjs";
 import {
   CreateCategoryData,
   FetchCategoryRequest,
@@ -11,14 +11,28 @@ import {
   providedIn: "root",
 })
 export class CategoryService {
+  categories = new BehaviorSubject<[]>([]);
+
   constructor(private http: HttpClient) {
+    this.fetchCategories().pipe(map((response: any) => {
+      return response.map((item: any) => {
+        return {
+          slug: item.slug,
+          name: item.name,
+        };
+      });
+    })).subscribe((data: any) => this.categories.next(data));
   }
 
-  fetchCategories(data: FetchCategoryRequest) {
-    return this.http.post("api/admin/category", data);
+  fetchCategories() {
+    return this.http.get<any[]>("api/categories", {
+      params: {
+        "paginated": false,
+      },
+    });
   }
 
-  fetchCategoriesObservable(data: FetchCategoryRequest) {
+  fetchAdminCategories(data: FetchCategoryRequest) {
     return this.http.post("api/admin/category", data);
   }
 

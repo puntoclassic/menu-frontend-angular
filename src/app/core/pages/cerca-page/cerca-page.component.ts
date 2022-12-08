@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { FoodService } from "src/app/amministrazione/services/food.service";
 import { AppService } from "src/app/shared/services/app.service";
 
 @Component({
@@ -12,9 +13,9 @@ export class CercaPageComponent implements OnInit {
   foods: any[] = [];
 
   constructor(
-    private appService: AppService,
     private route: ActivatedRoute,
     private router: Router,
+    private foodService: FoodService,
   ) {
     this.route.queryParams.subscribe((params) => {
       this.key = params["search"];
@@ -23,7 +24,7 @@ export class CercaPageComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.key != "") {
-      this.appService.searchFoods(this.key).subscribe((result: any) => {
+      this.foodService.searchFoods(this.key).subscribe((result: any) => {
         if (result.foods) {
           this.foods = result.foods;
         } else {

@@ -35,7 +35,7 @@ export class CategoryListPageComponent implements OnInit {
 
   fetchData() {
     this.items = null;
-    this.categoryService.fetchCategories({
+    this.categoryService.fetchAdminCategories({
       ascend: this.ascending,
       perPage: this.itemsPerPage,
       orderBy: this.orderBy,

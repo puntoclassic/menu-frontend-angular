@@ -40,7 +40,7 @@ export class FoodCreatePageComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private router: Router,
   ) {
-    this.categorySubscription = this.categoryService.fetchCategoriesObservable(
+    this.categorySubscription = this.categoryService.fetchAdminCategories(
       {
         paginated: false,
       },

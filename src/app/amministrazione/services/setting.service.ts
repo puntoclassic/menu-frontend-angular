@@ -16,7 +16,7 @@ export class SettingsService {
   }
 
   fetchSettings() {
-    this.http.get<[]>("api/setting/").subscribe((data) => {
+    this.getSettings().subscribe((data) => {
       var object: SettingFields = Object.assign(
         {},
         ...data.map((x: any) => ({ [x.name]: x.value })),
@@ -26,7 +26,7 @@ export class SettingsService {
   }
 
   getSettings() {
-    return this.http.get("api/setting/");
+    return this.http.get<any[]>("api/setting/");
   }
 
   pushSettings(data: SettingFields) {

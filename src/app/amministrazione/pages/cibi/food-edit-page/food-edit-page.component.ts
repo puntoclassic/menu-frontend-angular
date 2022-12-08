@@ -42,23 +42,11 @@ export class FoodEditPageComponent implements OnInit {
       this.id = params.id;
     });
 
-    this.categorySubscription = this.categoryService.fetchCategoriesObservable(
-      {
-        paginated: false,
-      },
-    )
-      .pipe(
-        map((item: any) => {
-          return item.categories.map((item) => {
-            return {
-              id: item.id,
-              name: item.name,
-            };
-          });
-        }),
-      ).subscribe((response: any) => {
+    this.categorySubscription = this.fetchCategories().subscribe(
+      (response: any) => {
         this.categories = response;
-      });
+      },
+    );
 
     this.nomeControl = this.formBuilder.control("", {
       validators: [
@@ -90,22 +78,36 @@ export class FoodEditPageComponent implements OnInit {
       price: this.priceControl,
       category_id: this.categoryControl,
     });
-
-    this.priceControl.statusChanges.subscribe((status: FormControlStatus) => {
-      console.log(status);
-      console.log(this.priceControl.errors);
-    });
   }
+
   ngOnDestroy(): void {
     this.categorySubscription.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.fetchData().subscribe();
+  }
+
+  fetchCategories() {
+    return this.categoryService.fetchAdminCategories(
+      {
+        paginated: false,
+      },
+    )
+      .pipe(
+        map((item: any) => {
+          return item.categories.map((item) => {
+            return {
+              id: item.id,
+              name: item.name,
+            };
+          });
+        }),
+      );
   }
 
   fetchData() {
-    this.foodService.getFood(this.id).pipe(
+    return this.foodService.getFood(this.id).pipe(
       map((response: any) => {
         this.nomeControl.setValue(response.name);
         this.ingredientsControl.setValue(response.ingredients);
@@ -116,7 +118,7 @@ export class FoodEditPageComponent implements OnInit {
         this.router.navigate(["./"]);
         return throwError(() => new Error("badRequest"));
       }),
-    ).subscribe();
+    );
   }
 
   onSubmit(data: any) {
@@ -131,7 +133,7 @@ export class FoodEditPageComponent implements OnInit {
             "Cibo aggiornato con successo",
           );
 
-          this.fetchData();
+          this.fetchData().subscribe();
         }),
         catchError(() => {
           this.isPending = false;
