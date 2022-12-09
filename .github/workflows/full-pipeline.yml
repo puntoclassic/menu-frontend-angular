@@ -28,9 +28,9 @@ jobs:
         run: npm run build  
   deploy-test-server:    
     name: Deploy to test server
-    needs: integrate
+    needs: delivery
     runs-on: self-hosted
-    environment: production
+    environment: test-server
     steps:
       - name: Upload to test server
         run: echo ""
