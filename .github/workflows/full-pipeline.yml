@@ -25,4 +25,13 @@ jobs:
       - name: Install dependencies
         run: npm install 
       - name: Build version
-        run: npm run build   
+        run: npm run build  
+  deploy-test-server:    
+    name: Deploy to test server
+    needs: integrate
+    runs-on: self-hosted
+    environment: production
+    steps:
+      - name: Upload to test server
+        run: echo ""
+       
