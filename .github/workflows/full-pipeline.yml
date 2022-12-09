@@ -1,5 +1,5 @@
 name: "Test and deploy"
-run-name: "Test and deploy ${{github.run_number}}"
+run-name: "Test and deploy Build ${{github.run_number}}"
 
 on: [workflow_dispatch]
 
@@ -16,6 +16,7 @@ jobs:
         run: npm run test-ci  
   delivery:    
     name: Create package for delivery
+    needs: integrate
     runs-on: self-hosted
     environment: production
     steps:
