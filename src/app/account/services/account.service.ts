@@ -13,8 +13,8 @@ import {
   providedIn: "root",
 })
 export class AccountService {
-  user$ = new ReplaySubject<any>(1);
-  userLogged$ = new ReplaySubject<boolean>(1);
+  user$: ReplaySubject<any> = new ReplaySubject<any>(1);
+  userLogged$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor(private http: HttpClient) {
     this.loadAccountState();
@@ -36,6 +36,10 @@ export class AccountService {
       });
     } catch (err) {
     }
+  }
+
+  getUser(): ReplaySubject<any> {
+    return this.user$;
   }
 
   getAccountState() {

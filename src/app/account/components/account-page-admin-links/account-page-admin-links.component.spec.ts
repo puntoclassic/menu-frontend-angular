@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { SharedModule } from "src/app/shared/shared.module";
 import { fakeAdminAccountData } from "src/app/test/fakeAdminAccountData";
-import { fakeAppData } from "src/app/test/fakeAppData";
-import { fakeEmptyCartData } from "src/app/test/fakeEmptyCartData";
 import { fakeSettingsData } from "src/app/test/fakeSettingsData";
 
 import { AccountPageAdminLinksComponent } from "./account-page-admin-links.component";
