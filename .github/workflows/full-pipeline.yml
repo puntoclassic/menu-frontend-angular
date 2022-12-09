@@ -1,4 +1,4 @@
-name: "Test new version"
+name: "Test and deploy"
 run-name: "Test and deploy ${{github.run_number}}"
 
 on: [workflow_dispatch]
