@@ -9,12 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
-      - name: Caching dipendenze
-        uses: actions/cache@v3
-        with: 
-          path: ~/.npm
-          key: dependencies-${{hashFiles('**/package-lock.json')}}
+        uses: actions/checkout@v3      
       - name: Install dependencies
         run: npm install 
       - name: Execute tests
@@ -26,12 +21,7 @@ jobs:
     environment: production
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
-      - name: Caching dipendenze
-        uses: actions/cache@v3
-        with: 
-          path: ~/.npm
-          key: dependencies-${{hashFiles('**/package-lock.json')}}
+        uses: actions/checkout@v3     
       - name: Install dependencies
         run: npm install 
       - name: Build version
