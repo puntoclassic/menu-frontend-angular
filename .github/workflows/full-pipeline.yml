@@ -10,6 +10,11 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
+      - name: Caching dipendenze
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm
+          key: dependencies-${{hashFiles("**/package-lock.json")}}
       - name: Install dependencies
         run: npm install 
       - name: Execute tests
@@ -22,6 +27,11 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
+      - name: Caching dipendenze
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm
+          key: dependencies-${{hashFiles("**/package-lock.json")}}
       - name: Install dependencies
         run: npm install 
       - name: Build version
@@ -37,6 +47,9 @@ jobs:
     runs-on: self-hosted
     environment: test-server
     steps:
-      - name: Upload to test server
-        run: echo ""
+      - name: Get Build package
+        uses: actions/download-artifact@v3
+        with:
+          name: "Build_${{github.run_number}}"
+      
        
