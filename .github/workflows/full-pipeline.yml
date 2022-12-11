@@ -14,7 +14,7 @@ jobs:
         uses: actions/cache@v3
         with: 
           path: ~/.npm
-          key: dependencies-${{hashFiles("**/package-lock.json")}}
+          key: dependencies-${{hashFiles('**/package-lock.json')}}
       - name: Install dependencies
         run: npm install 
       - name: Execute tests
@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v3
         with: 
           path: ~/.npm
-          key: dependencies-${{hashFiles("**/package-lock.json")}}
+          key: dependencies-${{hashFiles('**/package-lock.json')}}
       - name: Install dependencies
         run: npm install 
       - name: Build version
