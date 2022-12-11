@@ -45,7 +45,7 @@ jobs:
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          local-dir: ./Build_${{github.run_number}}
+          local-dir: ./Build_${{github.run_number}}/
           dangerous-clean-slate: true
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
