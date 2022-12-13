@@ -15,7 +15,7 @@ runs:
       run: npm install
       shell: bash
     - name: Build version
-      run: npm run build -- --configuration=${{inputs.configuration}} --output-path=dist/${{inputs.output-path}}
+      run: npm run build -- --configuration=${{inputs.configuration}} --output-path=dist/${{inputs.configuration}}
       shell: bash
     - name: Generate package
       uses: actions/upload-artifact@v3
