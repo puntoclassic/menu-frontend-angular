@@ -22,6 +22,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: show results
-      run: echo "${{needs.init.outputs.version-code}}"
+        run: echo "${{needs.init.outputs.version-code}}"
       
        
