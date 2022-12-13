@@ -35,10 +35,20 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3     
-      - name: Compila versione
+      - name: Compila versione "dev"
         uses: ./.github/actions/ng-build
         with:
-          version-code: ${{needs.init.outputs.version-code}}      
+          version-code: ${{needs.init.outputs.version-code}}     
+      - name: Compila versione "cliente1"
+        uses: ./.github/actions/ng-build
+        with:
+          configuration: cliente1
+          version-code: ${{needs.init.outputs.version-code}}  
+      - name: Compila versione "cliente2"
+        uses: ./.github/actions/ng-build
+        with:
+          configuration: cliente2
+          version-code: ${{needs.init.outputs.version-code}}
           
   deploy-test-server:    
     name: Deploy to test server

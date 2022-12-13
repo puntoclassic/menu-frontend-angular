@@ -6,10 +6,7 @@ inputs:
     type: string
   configuration:
     default: development
-    type: string
-  output-path:
-    default: dist/dev
-    type: string
+    type: string  
       
 runs:
   using: 'composite'
@@ -18,10 +15,10 @@ runs:
       run: npm install
       shell: bash
     - name: Build version
-      run: npm run build -- configuration=${{inputs.configuration}} --output-path=${{inputs.output-path}}
+      run: npm run build -- configuration=${{inputs.configuration}} --output-path=dist/${{inputs.output-path}}
       shell: bash
     - name: Generate package
       uses: actions/upload-artifact@v3
       with:
         name: "build_${{inputs.configuration}}_${{inputs.version-code}}"
-        path: ${{inputs.output-path}}
+        path: "dist/${{inputs.configuration}}""
