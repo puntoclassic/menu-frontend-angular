@@ -35,13 +35,10 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3     
-      - name: Compila versione
-        uses: ./.github/actions/ng-build       
-      - name: Generate package
-        uses: actions/upload-artifact@v3
+      - name: Compila versione "dev"
+        uses: ./.github/actions/ng-build
         with:
-          name: "build_${{needs.init.outputs.version-code}}"
-          path: dist/
+          version-code: ${{needs.init.outputs.version-code}}  
   deploy-test-server:    
     name: Deploy to test server
     needs: [init,delivery]
