@@ -35,10 +35,8 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3     
-      - name: Install dependencies
-        run: npm install 
-      - name: Build version
-        run: npm run build  
+      - name: Compila versione
+        uses: ./.github/actions/ng-build       
       - name: Generate package
         uses: actions/upload-artifact@v3
         with:
