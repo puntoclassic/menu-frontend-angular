@@ -11,9 +11,9 @@ jobs:
     steps:
         - name: Init params
           id: initstep
-          run: echo "Init params"  
-
+          run: echo "Init params" 
   integrate:
+    needs: init
     name: Integrate new features/bug fixings
     runs-on: self-hosted
     steps:
