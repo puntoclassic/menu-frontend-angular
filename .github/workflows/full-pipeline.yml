@@ -1,5 +1,5 @@
 name: "Test and deploy"
-run-name: "Test and deploy build ${{github.run_number}}"
+run-name: "Test and deploy build ${{env.version-code}}"
 
 on: [workflow_dispatch]
 
@@ -12,7 +12,9 @@ jobs:
     steps:
         - name: Init params
           id: initstep
-          run: echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_OUTPUT
+          run: |
+            echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_OUTPUT
+            echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_ENV
         - name: Print new version code
           run: echo "${{steps.initstep.outputs.version-code}}"   
   integrate:
