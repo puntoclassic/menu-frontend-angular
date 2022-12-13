@@ -1,5 +1,5 @@
 name: "Test and deploy"
-run-name: "Test and deploy build ${{$(date +'%Y%m%d')+"."+github.run_id}}"
+run-name: "Test and deploy build $build_code"
 
 on: [workflow_dispatch]
 env:
