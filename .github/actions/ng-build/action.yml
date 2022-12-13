@@ -21,4 +21,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: "build_${{inputs.configuration}}_${{inputs.version-code}}"
-        path: "dist/${{inputs.configuration}}""
+        path: "dist/${{inputs.configuration}}"
