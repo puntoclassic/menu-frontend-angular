@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: "build_${{github.run_id}}"
-          path: dist/dev/
+          path: dist/
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery
