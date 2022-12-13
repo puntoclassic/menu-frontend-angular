@@ -4,7 +4,7 @@ run-name: "Test and deploy build ${{github.run_number}}"
 on: [workflow_dispatch]
 
 jobs:
-   init:
+  init:
     name: Init params for workflow
     runs-on: self-hosted
     outputs:
@@ -14,7 +14,7 @@ jobs:
           id: initstep
           run: echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_OUTPUT
         - name: Print new version code
-          run: echo "${{steps.initstep.outputs.version-code}}"
+          run: echo "${{steps.initstep.outputs.version-code}}"   
   integrate:
     needs: init
     name: Integrate new features/bug fixings
