@@ -12,7 +12,7 @@ jobs:
     steps:
         - name: Init params
           id: initstep
-          run: echo "name=version-code::$(date +'%Y%m%d').${{github.run_number}}" >> $GITHUB_OUTPUT
+          run: echo "version-code=$(date +'%Y%m%d').${{github.run_number}}" >> $GITHUB_OUTPUT
         - name: Print new version code
           run: echo "${{steps.initstep.outputs.version-code}}"
   
