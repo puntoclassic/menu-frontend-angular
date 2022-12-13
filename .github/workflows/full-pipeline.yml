@@ -16,12 +16,13 @@ jobs:
         run: npm run test-ci        
   delivery:    
     needs: integrate
-    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master
-        
+    environment: production
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master        
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery
     environment: test-server
+    runs-on: self-hosted
     steps:
       - name: Get Build package
         uses: actions/download-artifact@v3
