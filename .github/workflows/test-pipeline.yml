@@ -10,10 +10,10 @@ jobs:
     outputs:
         version-code: ${{steps.initstep.outputs.version-code}}
     steps:
-        - name: Init params
-          id: initstep
-          run: |
-            echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_OUTPUT                 
+      - name: Init params
+        id: initstep
+        run: |
+          echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_ENV                
   delivery:    
     name: Create package for delivery
     needs: [init]
@@ -24,16 +24,7 @@ jobs:
       - name: Compila versione "dev"
         uses: ./.github/actions/ng-build
         with:
-          version-code: ${{needs.init.outputs.version-code}}     
-      - name: Compila versione "cliente1"
-        uses: ./.github/actions/ng-build
-        with:
-          configuration: cliente1
-          version-code: ${{needs.init.outputs.version-code}}  
-      - name: Compila versione "cliente2"
-        uses: ./.github/actions/ng-build
-        with:
-          configuration: cliente2
-          version-code: ${{needs.init.outputs.version-code}}  
+          version-code: ${{env.version-code}}     
+     
       
        
