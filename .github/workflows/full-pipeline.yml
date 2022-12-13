@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm install       
       - name: Build for prod
-        uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml        
+        uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master        
   
       
        
