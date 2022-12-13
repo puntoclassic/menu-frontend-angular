@@ -1,10 +1,19 @@
 name: "Test and deploy"
-run-name: "Test and deploy build ${{github.run_id}}"
+run-name: "Test and deploy build ${{github.run_number}}"
 
 on: [workflow_dispatch]
 
 jobs:
+  init:
+    runs-on: self-hosted
+    outputs:
+        version-code: ${{github.run_number}}
+    steps:
+        - name: Init params
+          id: initstep
+          run: echo "Init params" 
   integrate:
+    needs: init
     name: Integrate new features/bug fixings
     runs-on: self-hosted
     steps:
@@ -29,7 +38,7 @@ jobs:
       - name: Generate package
         uses: actions/upload-artifact@v3
         with:
-          name: "build_${{github.run_id}}"
+          name: "build_${{needs.init.outputs.version_code}}"
           path: dist/
   deploy-test-server:    
     name: Deploy to test server
@@ -40,12 +49,12 @@ jobs:
       - name: Get Build package
         uses: actions/download-artifact@v3
         with:
-          name: "build_${{github.run_id}}"
-          path: ./build_${{github.run_id}}
+          name: "build_${{needs.init.outputs.version_code}}"
+          path: ./build_${{needs.init.outputs.version_code}}
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          local-dir: ./build_${{github.run_id}}/
+          local-dir: ./build_${{needs.init.outputs.version_code}}/
           dangerous-clean-slate: true
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
