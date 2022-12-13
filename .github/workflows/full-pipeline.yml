@@ -15,8 +15,7 @@ jobs:
       - name: Execute tests
         run: npm run test-ci        
   delivery:    
-    needs: integrate
-    environment: production
+    needs: integrate    
     uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master        
   deploy-test-server:    
     name: Deploy to test server
