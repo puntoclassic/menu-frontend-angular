@@ -19,13 +19,25 @@ jobs:
     needs: integrate
     runs-on: self-hosted
     environment: production
+    uses: puntoclassic/frontend-menu-angular/.github/workflows/ng-build.yml@master    
+  deploy-test-server:    
+    name: Deploy to test server
+    needs: delivery
+    runs-on: self-hosted
+    environment: test-server
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3     
-      - name: Install dependencies
-        run: npm install       
-      - name: Build for prod
-        uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master        
-  
+      - name: Get Build package
+        uses: actions/download-artifact@v3
+        with:
+          name: "Build_${{github.run_number}}"
+          path: ./Build_${{github.run_number}}
+      - name: Upload to test-server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          local-dir: ./Build_${{github.run_number}}/
+          dangerous-clean-slate: true
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
       
        

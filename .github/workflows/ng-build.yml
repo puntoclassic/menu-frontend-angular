@@ -11,7 +11,11 @@ jobs:
   pack:    
     name: Create package
     runs-on: self-hosted  
-    steps:       
+    steps:      
+      - name: Check out the repo
+        uses: actions/checkout@v3     
+      - name: Install dependencies
+        run: npm install  
       - name: Build version
         run: npm run build --configuration=${{inputs.configuration}} --output-path=${{inputs.output-path}}
       - name: Generate package
@@ -19,6 +23,7 @@ jobs:
         with:
           name: "Build_${{inputs.configuration}}_${{github.run_number}}"
           path: ${{inputs.output-path}}
+      
   
       
        
