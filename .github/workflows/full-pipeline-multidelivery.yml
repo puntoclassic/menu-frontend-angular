@@ -14,33 +14,31 @@ jobs:
         run: npm install 
       - name: Execute tests
         run: npm run test-ci        
-  delivery:    
-    name: Create package for delivery
-    needs: integrate
-    runs-on: self-hosted
-    environment: production
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3     
-      - name: Install dependencies
-        run: npm install 
-      - name: Build version
-        run: npm run build  
-      - name: Generate package
-        uses: actions/upload-artifact@v3
-        with:
-          name: "Build_${{github.run_number}}"
-          path: dist/dev/
+  delivery-test:    
+    needs: integrate    
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master
+  delivery-cliente1:    
+    needs: integrate    
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master  
+    with:
+      configuration: cliente1
+      output-path: dist/cliente1   
+  delivery-cliente2:    
+    needs: integrate    
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master  
+    with:
+      configuration: cliente2
+      output-path: dist/cliente2    
   deploy-test-server:    
     name: Deploy to test server
-    needs: delivery
-    runs-on: self-hosted
+    needs: delivery-test
     environment: test-server
+    runs-on: self-hosted
     steps:
       - name: Get Build package
         uses: actions/download-artifact@v3
         with:
-          name: "Build_${{github.run_number}}"
+          name: "Build_development_${{github.run_number}}"
           path: ./Build_${{github.run_number}}
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
