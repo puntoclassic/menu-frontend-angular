@@ -4,9 +4,11 @@ on:
   workflow_call:
     inputs: 
       configuration:
-        default-value: production
+        default: production
+        type: string
       output-path:
-        default-value: dist/prod
+        default: dist/prod
+        type: string
 jobs:  
   pack:    
     name: Create package
