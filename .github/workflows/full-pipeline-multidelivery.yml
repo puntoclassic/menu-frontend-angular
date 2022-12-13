@@ -1,5 +1,5 @@
 name: "Test and deploy (multi-delivery)"
-run-name: "Test and deploy Build ${{github.run_number}}"
+run-name: "Test and deploy Build ${{github.run_id}}"
 
 on: [workflow_dispatch]
 
@@ -38,12 +38,12 @@ jobs:
       - name: Get Build package
         uses: actions/download-artifact@v3
         with:
-          name: "Build_development_${{github.run_number}}"
-          path: ./Build_${{github.run_number}}
+          name: "Build_development_${{github.run_id}}"
+          path: ./build_${{github.run_id}}
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          local-dir: ./Build_${{github.run_number}}/
+          local-dir: ./build_${{github.run_id}}/
           dangerous-clean-slate: true
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
