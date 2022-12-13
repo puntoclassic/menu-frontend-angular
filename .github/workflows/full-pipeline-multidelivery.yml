@@ -1,12 +1,18 @@
 name: "Test and deploy (multi-delivery)"
-run-name: "Test and deploy Build ${{github.run_id}}"
+run-name: "Test and deploy Build ${{needs.init.outputs.version_code}}"
 
-on: [workflow_dispatch]
-
-env:
-  VERSION_CODE: ${{github.run_id}}
+on: [workflow_dispatch] 
 
 jobs:
+  init:
+    runs-on: self-hosted
+    outputs:
+        version-code: ${{github.run_id}}
+    steps:
+        - name: Init params
+          id: initstep
+          run: echo "Init params"  
+
   integrate:
     name: Integrate new features/bug fixings
     runs-on: self-hosted
@@ -28,14 +34,14 @@ jobs:
     with:
       configuration: cliente1
       output-path: dist/cliente1  
-      version-code: ${{env.VERSION_CODE}}
+      version-code: ${{needs.init.outputs.version_code}}
   delivery-cliente2:    
     needs: integrate    
     uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master  
     with:
       configuration: cliente2
       output-path: dist/cliente2    
-      version-code: ${{env.VERSION_CODE}}
+      version-code: ${{needs.init.outputs.version_code}}
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery-test
@@ -45,12 +51,12 @@ jobs:
       - name: Get Build package
         uses: actions/download-artifact@v3
         with:
-          name: "build_production_${{env.VERSION_CODE}}"
-          path: ./build_${{env.VERSION_CODE}}
+          name: "build_production_${{needs.init.outputs.version_code}}"
+          path: ./build_${{needs.init.outputs.version_code}}
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          local-dir: ./build_${{env.VERSION_CODE}}/
+          local-dir: ./build_${{needs.init.outputs.version_code}}/
           dangerous-clean-slate: true
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
