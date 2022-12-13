@@ -13,13 +13,7 @@ jobs:
       - name: Install dependencies
         run: npm install 
       - name: Execute tests
-        run: npm run test-ci  
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-            languages: javascript 
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        run: npm run test-ci        
   delivery:    
     name: Create package for delivery
     needs: integrate
@@ -31,25 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm install       
       - name: Build for prod
-        uses: ./github/workflows/ng-build.yml        
-  deploy-test-server:    
-    name: Deploy to test server
-    needs: delivery
-    runs-on: self-hosted
-    environment: test-server
-    steps:
-      - name: Get Build package
-        uses: actions/download-artifact@v3
-        with:
-          name: "Build_${{github.run_number}}"
-          path: ./Build_${{github.run_number}}
-      - name: Upload to test-server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
-        with:
-          local-dir: ./Build_${{github.run_number}}/
-          dangerous-clean-slate: true
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
+        uses: ./.github/workflows/ng-build.yml        
+  
       
        
