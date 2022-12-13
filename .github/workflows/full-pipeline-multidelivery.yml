@@ -4,7 +4,7 @@ run-name: "Test and deploy Build ${{github.run_id}}"
 on: [workflow_dispatch]
 
 env:
-  version-code: ${{github.run_id}}
+  VERSION_CODE: ${{github.run_id}}
 
 jobs:
   integrate:
@@ -28,14 +28,14 @@ jobs:
     with:
       configuration: cliente1
       output-path: dist/cliente1  
-      version-code: ${{env.version-code}}
+      version-code: ${{env.VERSION_CODE}}
   delivery-cliente2:    
     needs: integrate    
     uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master  
     with:
       configuration: cliente2
       output-path: dist/cliente2    
-      version-code: ${{env.version-code}}
+      version-code: ${{env.VERSION_CODE}}
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery-test
@@ -45,12 +45,12 @@ jobs:
       - name: Get Build package
         uses: actions/download-artifact@v3
         with:
-          name: "build_production_${{env.version-code}}"
-          path: ./build_${{env.version-code}}
+          name: "build_production_${{env.VERSION_CODE}}"
+          path: ./build_${{env.VERSION_CODE}}
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          local-dir: ./build_${{env.version-code}}/
+          local-dir: ./build_${{env.VERSION_CODE}}/
           dangerous-clean-slate: true
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
