@@ -19,7 +19,7 @@ jobs:
     needs: integrate
     runs-on: self-hosted
     environment: production
-    uses: puntoclassic/frontend-menu-angular/.github/workflows/ng-build.yml@master    
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master    
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery
