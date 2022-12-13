@@ -1,9 +1,9 @@
 name: "Test and deploy"
-run-name: "Test and deploy build $build_code"
+run-name: "Test and deploy build ${{$build_code}}"
 
 on: [workflow_dispatch]
 env:
-  build_code: ${{$(date +'%Y%m%d')+"."+github.run_id}}
+  build_code: $(date +'%Y%m%d')+"."+github.run_id
 
 jobs:
   integrate:
