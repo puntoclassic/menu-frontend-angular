@@ -3,6 +3,9 @@ name: "Angular build specific configuration"
 on: 
   workflow_call:
     inputs: 
+      version-code: 
+        default: ${{github.run_id}}
+        type: string
       configuration:
         default: development
         type: string
@@ -23,7 +26,7 @@ jobs:
       - name: Generate package
         uses: actions/upload-artifact@v3
         with:
-          name: "Build_${{inputs.configuration}}_${{github.run_number}}"
+          name: "build_${{inputs.configuration}}_${{inputs.version-code}}"
           path: ${{inputs.output-path}}
       
   
