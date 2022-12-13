@@ -1,7 +1,9 @@
 name: "Test and deploy"
-run-name: "Test and deploy Build ${{github.run_number}}"
+run-name: "Test and deploy build ${{$(date +'%Y%m%d')+"."+github.run_id}}"
 
 on: [workflow_dispatch]
+env:
+  build_code: ${{$(date +'%Y%m%d')+"."+github.run_id}}
 
 jobs:
   integrate:
@@ -29,7 +31,7 @@ jobs:
       - name: Generate package
         uses: actions/upload-artifact@v3
         with:
-          name: "Build_${{github.run_number}}"
+          name: "build_${{$build_code}}"
           path: dist/dev/
   deploy-test-server:    
     name: Deploy to test server
@@ -40,12 +42,12 @@ jobs:
       - name: Get Build package
         uses: actions/download-artifact@v3
         with:
-          name: "Build_${{github.run_number}}"
-          path: ./Build_${{github.run_number}}
+          name: "build_${{$build_code}}"
+          path: ./build_${{$build_code}}
       - name: Upload to test-server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          local-dir: ./Build_${{github.run_number}}/
+          local-dir: ./build_${{$build_code}}/
           dangerous-clean-slate: true
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
