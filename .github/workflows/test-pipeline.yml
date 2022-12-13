@@ -1,0 +1,40 @@
+name: "Test action"
+run-name: "Test action with build ${{github.run_number}}"
+
+on: [workflow_dispatch]
+
+jobs:
+  init:
+    name: Init params for workflow
+    runs-on: self-hosted    
+    outputs:
+        version-code: ${{steps.initstep.outputs.version-code}}
+    steps:
+        - name: Init params
+          id: initstep
+          run: |
+            echo "version-code=$(date +'%Y%m%d')${{github.run_number}}" >> $GITHUB_OUTPUT
+        - name: Print new version code         
+  delivery:    
+    name: Create package for delivery
+    needs: [init]
+    runs-on: self-hosted
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3     
+      - name: Compila versione "dev"
+        uses: ./.github/actions/ng-build
+        with:
+          version-code: ${{needs.init.outputs.version-code}}     
+      - name: Compila versione "cliente1"
+        uses: ./.github/actions/ng-build
+        with:
+          configuration: cliente1
+          version-code: ${{needs.init.outputs.version-code}}  
+      - name: Compila versione "cliente2"
+        uses: ./.github/actions/ng-build
+        with:
+          configuration: cliente2
+          version-code: ${{needs.init.outputs.version-code}}  
+      
+       
