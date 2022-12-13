@@ -1,4 +1,4 @@
-name: "Test and deploy"
+name: "Test and deploy (multi-delivery)"
 run-name: "Test and deploy Build ${{github.run_number}}"
 
 on: [workflow_dispatch]
