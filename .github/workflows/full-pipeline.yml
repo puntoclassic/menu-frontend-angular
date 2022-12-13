@@ -6,8 +6,7 @@ on: [workflow_dispatch]
 jobs:
   init:
     name: Init params for workflow
-    runs-on: self-hosted
-    id: init
+    runs-on: self-hosted    
     outputs:
         version-code: ${{steps.initstep.outputs.version-code}}
     steps:
