@@ -29,14 +29,9 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3     
       - name: Install dependencies
-        run: npm install 
-      - name: Build version
-        run: npm run build  
-      - name: Generate package
-        uses: actions/upload-artifact@v3
-        with:
-          name: "Build_${{github.run_number}}"
-          path: dist/frontend-angular/browser/
+        run: npm install       
+      - name: Build for prod
+        uses: ./github/workflows/ng-build.yml        
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery

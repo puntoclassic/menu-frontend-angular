@@ -1,0 +1,24 @@
+name: "Angular build specific configuration"
+
+on: 
+  workflow_call:
+    inputs: 
+      configuration:
+        default-value: production
+      output-path:
+        default-value: dist/prod
+jobs:  
+  pack:    
+    name: Create package
+    runs-on: self-hosted  
+    steps:       
+      - name: Build version
+        run: npm run build --configuration=${{inputs.configuration}} --output-path=${{inputs.output-path}}
+      - name: Generate package
+        uses: actions/upload-artifact@v3
+        with:
+          name: "Build_${{inputs.configuration}}_${{github.run_number}}"
+          path: ${{inputs.output-path}}
+  
+      
+       
