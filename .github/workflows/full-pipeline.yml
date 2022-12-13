@@ -12,7 +12,7 @@ jobs:
     steps:
         - name: Init params
           id: initstep
-          run: echo "::set-output name=version-code::$(date)+"."+${{github.run_number}}" 
+          run: echo "::set-output name=version-code::$(date+'%Y%m%d')+"."+${{github.run_number}}" 
         - name: Print new version code
           run: echo "${{steps.initstep.outputs.version-code}}"
   
