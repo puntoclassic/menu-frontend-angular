@@ -1,5 +1,5 @@
 name: "Test and deploy (multi-delivery)"
-run-name: "Test and deploy Build ${{needs.init.outputs.version_code}}"
+run-name: "Test and deploy build ${{github.run_id}}"
 
 on: [workflow_dispatch] 
 
