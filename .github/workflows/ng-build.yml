@@ -4,10 +4,10 @@ on:
   workflow_call:
     inputs: 
       configuration:
-        default: production
+        default: development
         type: string
       output-path:
-        default: dist/prod
+        default: dist/dev
         type: string
 jobs:  
   pack:    
