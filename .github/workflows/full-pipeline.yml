@@ -14,9 +14,21 @@ jobs:
         run: npm install 
       - name: Execute tests
         run: npm run test-ci        
-  delivery:    
+  delivery-prod:    
     needs: integrate    
-    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master        
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master
+  delivery-cliente1:    
+    needs: integrate    
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master  
+    with:
+      configuration: cliente1
+      output-path: dist/cliente1   
+  delivery-cliente2:    
+    needs: integrate    
+    uses: puntoclassic/menu-frontend-angular/.github/workflows/ng-build.yml@master  
+    with:
+      configuration: cliente2
+      output-path: dist/cliente2    
   deploy-test-server:    
     name: Deploy to test server
     needs: delivery
