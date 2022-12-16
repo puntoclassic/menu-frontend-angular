@@ -1,0 +1,30 @@
+name: "$(date:yyyyMMdd)$(Build.BuildId)"
+
+trigger: none
+
+pool:
+  name: default
+  demands:
+  - agent.name -equals MacBook-Pro-di-Jonathan
+
+stages:   
+- stage: build 
+  displayName: "Compilazione versione"  
+  jobs:    
+    - job: compilazione
+      displayName: "Compilazione"
+      steps:
+        - script: npm install
+          displayName: 'Installa dipendenze'        
+        - template: build-configuration.yml
+          parameters:
+            configuration: development 
+        - template: build-configuration.yml
+          parameters:
+            configuration: cliente1
+
+  
+     
+                      
+          
+

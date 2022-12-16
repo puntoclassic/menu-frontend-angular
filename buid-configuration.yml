@@ -1,0 +1,13 @@
+parameters: 
+- name: configuration
+  type: string
+
+jobs:
+  - script: npm run build -- --configuration=${{parameters.configuration}} --output-path=dist/${{parameters.configuration}}
+    displayName: 'Compila'              
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.SourcesDirectory)/dist/${{parameters.configuration}}'  
+      artifact: "$(date:yyyyMMdd)$(Build.BuildId)_${{parameters.configuration}}"          
+      publishLocation: 'pipeline'
+    displayName: "Pubblica artefatto"
