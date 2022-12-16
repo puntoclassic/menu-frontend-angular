@@ -6,6 +6,7 @@ on: [workflow_dispatch]
 jobs:  
   sync-aws-s3:
     name: Sincronizza con S3
+    runs-on: self-hosted
     steps:      
       - name: Sincronizza con s3
         uses: ItsKarma/aws-cli@v1.70.0
