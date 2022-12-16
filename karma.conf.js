@@ -39,8 +39,8 @@ module.exports = function (config) {
     logLevel: config.LOG,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true,
+    singleRun: true,
+    restartOnFileChange: false,
 
   });
 };
