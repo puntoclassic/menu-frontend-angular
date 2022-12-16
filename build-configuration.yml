@@ -9,6 +9,6 @@ steps:
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.SourcesDirectory)/dist/${{parameters.configuration}}'  
-      artifact: $(date:yyyyMMdd)$(Build.BuildId)_${{parameters.configuration}}       
+      artifact: $(Build.DefinitionName)_${{parameters.configuration}}       
       publishLocation: 'pipeline'
-    displayName: "Pubblica artefatto per $(date:yyyyMMdd)$(Build.BuildId)_${{parameters.configuration}} "
+    displayName: "Pubblica artefatto per $(Build.DefinitionName)_${{parameters.configuration}} "
