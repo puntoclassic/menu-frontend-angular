@@ -9,36 +9,46 @@ pool:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
 stages:
-- stage: Testing 
+- stage: test
   displayName: "Test di versione"
   jobs:   
-    - job: Test             
+    - job: test             
       steps:
         - script: npm install
           displayName: 'Installa dipendenze'        
         - script: npm run test-ci
           displayName: 'Esegui test' 
-      displayName: "Test versione"     
-- stage: Deploy
-  dependsOn: Testing
+      displayName: "Test automatici"     
+- stage: build
+  dependsOn: Test
   condition: succeeded()
-  displayName: "Deploy versione"  
+  displayName: "Compilazione versione"  
   jobs:    
+    - job: compilazione
+      steps:
+        - script: npm install
+          displayName: 'Installa dipendenze'        
+        - script: npm run build
+          displayName: 'Compila'              
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Build.SourcesDirectory)/dist/'
+            publishLocation: 'pipeline'
+          displayName: "Pubblica artefatto" 
+- stage: deploy 
+  dependsOn: build
+  condition: succeeded()
+  displayName: "Deploy server test"
+  jobs:
     - deployment: 
-      displayName: "Distribuzione versione"
       environment: Production
       strategy:
         runOnce:
           deploy:
-            steps:              
-              - script: npm install
-                displayName: 'Installa dipendenze'        
-              - script: npm run build
-                displayName: 'Compila'              
-              - task: PublishPipelineArtifact@1
-                inputs:
-                  targetPath: '$(Build.SourcesDirectory)/dist/frontend-angular/browser/'
-                  publishLocation: 'pipeline'
-                displayName: "Pubblica artefatto"        
+            steps:
+              - script: aws s3 sync --delete public-read ./dist s3://besolution.menuangular/
+                displayName: Pubblicazione su AWS S3
+    
+                      
           
 
