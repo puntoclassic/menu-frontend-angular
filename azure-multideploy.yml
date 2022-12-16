@@ -15,8 +15,20 @@ parameters:
       - cliente1
       - cliente2
 
-stages:   
+stages:  
+- stage: test
+  displayName: "Test di versione"
+  jobs:   
+    - job: test             
+      steps:
+        - script: npm install
+          displayName: 'Installa dipendenze'        
+        - script: npm run test-ci
+          displayName: 'Esegui test' 
+      displayName: "Test automatici"  
 - stage: build 
+  dependsOn: Test
+  condition: succeeded()
   displayName: "Compilazione versione"  
   jobs:    
     - job: compilazione
