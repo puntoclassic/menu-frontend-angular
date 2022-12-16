@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:      
       - name: Sincronizza con s3
-        uses: ItsKarma/aws-cli@v1.70.0
+        uses: jakejarvis/s3-sync-action@master
         with:
           args: s3 sync --delete --acl public-read dist/development s3://besolution.menuangular/
         env:
