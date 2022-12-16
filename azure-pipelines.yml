@@ -2,7 +2,6 @@ name: "$(date:yyyyMMdd)$(Build.BuildId)"
 
 trigger: none
 
-
 pool:
   name: default
   demands:
@@ -18,7 +17,7 @@ stages:
           displayName: 'Installa dipendenze'        
         - script: npm run test-ci
           displayName: 'Esegui test' 
-      displayName: "Test automatici"     
+      displayName: "Test automatici"    
 - stage: build
   dependsOn: Test
   condition: succeeded()
