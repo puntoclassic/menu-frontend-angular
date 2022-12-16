@@ -25,6 +25,7 @@ stages:
   displayName: "Compilazione versione"  
   jobs:    
     - job: compilazione
+      displayName: "Compilazione"
       steps:
         - script: npm install
           displayName: 'Installa dipendenze'        
@@ -42,12 +43,14 @@ stages:
   jobs:
     - deployment: 
       environment: Production
+      displayName: "Deploy su bucket S3"
       strategy:
         runOnce:
           deploy:
             steps:
-              - script: aws s3 sync --delete public-read ./dist s3://besolution.menuangular/
+              - script: aws s3 sync --delete ./dist s3://besolution.menuangular/
                 displayName: Pubblicazione su AWS S3
+  
     
                       
           
