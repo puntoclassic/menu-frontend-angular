@@ -7,6 +7,14 @@ pool:
   demands:
   - agent.name -equals MacBook-Pro-di-Jonathan
 
+parameters:
+  - name: configurations
+    type: object
+    default:
+      - development
+      - cliente1
+      - cliente2
+
 stages:   
 - stage: build 
   displayName: "Compilazione versione"  
@@ -15,13 +23,12 @@ stages:
       displayName: "Compilazione"
       steps:
         - script: npm install
-          displayName: 'Installa dipendenze'        
-        - template: build-configuration.yml
-          parameters:
-            configuration: development 
-        - template: build-configuration.yml
-          parameters:
-            configuration: cliente1
+          displayName: 'Installa dipendenze'  
+        - ${{ each configuration in parameters.configurations }}:      
+          - template: build-configuration.yml
+            parameters:
+              configuration: ${{configuration}} 
+        
 
   
      

@@ -11,4 +11,4 @@ steps:
       targetPath: '$(Build.SourcesDirectory)/dist/${{parameters.configuration}}'  
       artifact: $(Build.BuildNumber)_${{parameters.configuration}}       
       publishLocation: 'pipeline'
-    displayName: "Pubblica artefatto per $(Build.BuildNumber)_${{parameters.configuration}} "
+    displayName: "Pubblica artefatto per ${{parameters.configuration}} "
