@@ -34,8 +34,7 @@
               "src/libs/bootstrap/bootstrap.bundle.min.js"
             ]
           },
-          "configurations": {
-            
+          "configurations": {            
             "production": {
               "budgets": [
                 {
@@ -73,7 +72,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/cliente1.ts"
                 }
               ],
               "outputHashing": "all"
@@ -94,7 +93,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/cliente2.ts"
                 }
               ],
               "outputHashing": "all"
@@ -105,8 +104,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
-             
+              "namedChunks": true             
             }
           },
           "defaultConfiguration": "production"
