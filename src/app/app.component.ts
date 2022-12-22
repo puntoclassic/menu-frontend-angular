@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { Component, Inject, OnInit, ViewEncapsulation } from "@angular/core";
 import {
   ChildrenOutletContexts,
   NavigationCancel,
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
     public translate: TranslateService,
     private accountService: AccountService,
     private settingsService: SettingsService,
-    private router: Router,
+    @Inject(DOCUMENT) private documentRef: Document,
   ) {
     // Register translation languages
     translate.addLangs(["en", "it"]);
@@ -40,17 +41,17 @@ export class AppComponent implements OnInit {
     });
 
     this.settingsService.settings.subscribe((status: SettingFields) => {
-      document.documentElement.style.setProperty(
+      documentRef.documentElement.style.setProperty(
         "--bs-primary-rgb",
         this.convertToRGB(status.theme_primary_color),
       );
 
-      document.documentElement.style.setProperty(
+      documentRef.documentElement.style.setProperty(
         "--bs-secondary-rgb",
         this.convertToRGB(status.theme_secondary_color),
       );
 
-      document.documentElement.style.setProperty(
+      documentRef.documentElement.style.setProperty(
         "--bs-link-color",
         this.convertToRGB(status.theme_secondary_color),
       );

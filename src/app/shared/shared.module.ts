@@ -57,7 +57,9 @@ export const BACKEND_URL = new InjectionToken<string>("BACKEND_URL");
     LoadingPageComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({
+      appId: "menu-frontend-angular",
+    }),
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
